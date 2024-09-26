@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcelas e Prazos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Parcelas e Prazos</h1>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Tipo</th>
+                <th>Valor da Entrada</th>
+                <th>Crédito</th>
+                <th>Prazo</th>
+                <th>Valor da Parcela</th>
+                <th>Código</th>
+                <th>Data de Validade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 20 linhas geradas automaticamente -->
+        </tbody>
+    </table>
+    <button id="calculate">Calcular</button>
+    <div class="result">
+        <h2>Resultados</h2>
+        <div id="parcelas-result"></div>
+        <div id="valor-total"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Função para gerar números aleatórios
+            function getRandomNumber(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            // Função para formatar números no formato "xx.xxx,xx"
+            function formatNumber(value) {
+                return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            // Função para gerar dados aleatórios para a tabela
+            function generateRandomData() {
+                const types = ["Tipo A", "Tipo B", "Tipo C"];
+                const tbody = $('#data-table tbody');
+                for (let i = 0; i < 20; i++) {
+                    const tipo = types[getRandomNumber(0, types.length - 1)];
+                    const valorEntrada = formatNumber(getRandomNumber(1000, 10000));
+                    const credito = formatNumber(getRandomNumber(1000, 10000));
+                    const prazo = getRandomNumber(1, 120);
+                    const valorParcela = formatNumber(getRandomNumber(100, 1000));
+                    const codigo = getRandomNumber(1000, 9999);
+                    const dataValidade = new Date(getRandomNumber(2023, 2025), getRandomNumber(0, 11), getRandomNumber(1, 28)).toISOString().split('T')[0];
+
+                    tbody.append(`
+                <tr>
+                    <td><input type="checkbox" class="select-row"></td>
+                    <td>${tipo}</td>
+                    <td>${valorEntrada}</td>
+                    <td>${credito}</td>
+                    <td class="prazo">${prazo}</td>
+                    <td class="parcela">${valorParcela}</td>
+                    <td>${codigo}</td>
+                    <td>${dataValidade}</td>
+                </tr>
+            `);
+                }
+            }
+
+            // Função para formatar números no formato "xx.xxx,xx"
+            function formatNumber(value) {
+                return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            generateRandomData();
+
+            // Atualizar a função de cálculo
+            $(document).ready(function () {
+            // Função para gerar números aleatórios
+            function getRandomNumber(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            // Função para formatar números no formato "xx.xxx,xx"
+            function formatNumber(value) {
+                return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            // Função para gerar dados aleatórios para a tabela
+            function generateRandomData() {
+                const types = ["Tipo A", "Tipo B", "Tipo C"];
+                const tbody = $('#data-table tbody');
+                for (let i = 0; i < 20; i++) {
+                    const tipo = types[getRandomNumber(0, types.length - 1)];
+                    const valorEntrada = formatNumber(getRandomNumber(1000, 10000));
+                    const credito = formatNumber(getRandomNumber(1000, 10000));
+                    const prazo = getRandomNumber(1, 120);
+                    const valorParcela = formatNumber(getRandomNumber(100, 1000));
+                    const codigo = getRandomNumber(1000, 9999);
+                    const dataValidade = new Date(getRandomNumber(2023, 2025), getRandomNumber(0, 11), getRandomNumber(1, 28)).toISOString().split('T')[0];
+
+                    tbody.append(`
+                <tr>
+                    <td><input type="checkbox" class="select-row"></td>
+                    <td>${tipo}</td>
+                    <td>${valorEntrada}</td>
+                    <td>${credito}</td>
+                    <td class="prazo">${prazo}</td>
+                    <td class="parcela">${valorParcela}</td>
+                    <td>${codigo}</td>
+                    <td>${dataValidade}</td>
+                </tr>
+            `);
+                }
+            }
+
+            // Função para formatar números no formato "xx.xxx,xx"
+            function formatNumber(value) {
+                return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            generateRandomData();
+
+            // Atualizar a função de cálculo
+            $('#calculate').click(function () {
+                // Obter as linhas selecionadas
+                let selectedRows = $('#data-table tbody tr').has('input.select-row:checked');
+
+                if (selectedRows.length === 0) {
+                    alert('Selecione pelo menos uma linha.');
+                    return;
+                }
+
+                let linhas = selectedRows.map(function () {
+                    return {
+                        prazo: parseInt($(this).find('.prazo').text()),
+                        parcela: parseFloat($(this).find('.parcela').text().replace(/\./g, '').replace(',', '.'))
+                    };
+                }).get();
+
+                // Ordenar as linhas por prazo de forma crescente
+                linhas.sort((a, b) => a.prazo - b.prazo);
+
+                let resultado = [];
+                let total = 0;
+
+                while (linhas.length > 1) {
+                    let primeiraConta = linhas[0].prazo;
+                    let somaParcelas = linhas.reduce((acc, linha) => acc + linha.parcela, 0);
+                    total += somaParcelas * primeiraConta;
+
+                    resultado.push(`${primeiraConta}x ${formatNumber(somaParcelas)}`);
+
+                    linhas = linhas.filter(linha => linha.prazo !== primeiraConta);
+
+                    linhas.forEach(linha => linha.prazo -= primeiraConta);
+                }
+
+                if (linhas.length === 1) {
+                    total += linhas[0].parcela * linhas[0].prazo;
+                    resultado.push(`${linhas[0].prazo}x ${formatNumber(linhas[0].parcela)}`);
+                }
+
+                let parcelasResult = $('#parcelas-result');
+                parcelasResult.empty();
+                resultado.forEach(res => {
+                    parcelasResult.append(`<div>${res}</div>`);
+                });
+
+                $('#valor-total').text(`Valor Total: ${formatNumber(total)}`);
+            });
+        });
+        });
+
+    </script>
+</body>
+
+</html>

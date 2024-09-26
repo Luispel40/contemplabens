@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+    }
+
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      height: 100dvh;
+      width: 100dvw;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /*Tabela*/
+    .ritz {
+      max-width: 800px;
+      background-color: white;
+      max-height: 100vh;
+      overflow: scroll;
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      margin: auto;
+    }
+
+    .ritz::-webkit-scrollbar {
+      background-color: rgb(255, 255, 255);
+      width: 10px;
+    }
+
+    .ritz::-webkit-scrollbar-thumb {
+      background-color: rgb(223, 176, 23);
+      border-radius: 5px;
+    }
+
+    .waffle {
+      display: flex;
+      flex-direction: column !important;
+      width: 100%;
+    }
+
+    table {
+      background-color: white;
+      margin: 0 auto;
+      border-radius: 5px;
+      padding: 20px;
+    }
+
+    thead {
+      display: none;
+    }
+
+    th:first-child {
+      display: none;
+    }
+
+    tr td {
+      border: .4px solid rgba(128, 128, 128, 0.486);
+      padding: 5px;
+    }
+
+    tr:not(tr:nth-child(1)) {
+      transition: .3s;
+    }
+
+    tr:hover:not(tr:nth-child(1)) {
+      transform: scale(1.01);
+      background-color: #ffe600;
+      cursor: pointer;
+    }
+
+    tr:nth-child(1) {
+      background-color: #e4cd00;
+      pointer-events: none;
+    }
+
+    header {
+      margin: 30px auto;
+    }
+
+    .head,
+    .head img {
+      margin: 0 auto;
+    }
+  </style>
+  <title>Compartilhar</title>
+</head>
+
+<body>
+
+  <!-- Cabeçalho do site. -->
+  <header>
+    <section class="head">
+      <div class="container">
+        <img src="http://designerluiscoms.com/wp-content/uploads/2024/07/logo-contemplabens.webp" alt="">
+      </div>
+    </section>
+  </header>
+
+  <div id="sharedContent"></div>
+  
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const encodedContent = params.get('content');
+    let decodedContent = '';
+
+    //console.log(encodedContent);
+
+
+
+
+
+
+    
+    if (encodedContent) {
+      decodedContent = decodeURIComponent(encodedContent);
+      document.getElementById('sharedContent').innerHTML = decodedContent;
+    } else {
+      document.getElementById('sharedContent').innerHTML = '<p>Conteúdo não encontrado.</p>';
+    }
+
+    document.getElementById('shareButton').innerHTML = `<p>Compartilhar no whatsapp</p> <i class="fa-brands fa-whatsapp"></i>`
+    document.getElementById('shareButton').addEventListener('click', function() {
+    // Captura a terceira linha da tabela
+    const row = document.querySelector('table tr:nth-child(3)');
+    const cells = Array.from(row.querySelectorAll('td'));
+    
+    // Remove o primeiro item da variável cells
+    cells.shift();
+    
+    // Define os nomes das colunas (ajustados para a nova quantidade de células)
+    const columnNames = ['Seguimento', 'ADM', 'Crédito', 'Entrada', 'Prazo', 'Parcelas', 'Cod', 'Saldo Devedor', 'Vencimento'];
+    
+    // Cria o texto da mensagem
+    let message = '';
+    for (let i = 0; i < cells.length; i++) {
+      message += `*${columnNames[i]}*: ${cells[i].innerText}.\n `;
+    }
+    
+    // Codifica o texto para URL
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message.trim())}`;
+    
+    // Abre o link do WhatsApp
+    window.open(whatsappUrl, '_blank');
+  });
+    
+
+    // // Função para extrair os valores da tabela e enviá-los pelo WhatsApp
+    // function enviarWhatsApp() {
+    //   // Seleciona todas as linhas da tabela
+    //   const linhas = document.querySelectorAll('table tr');
+
+    //   let mensagem = '';
+
+    //   // Itera sobre cada linha para pegar os valores das células
+    //   linhas.forEach((linha, index) => {
+    //     console.log(`Linha ${index + 1}:`, linha.innerHTML); // Exibe o conteúdo da linha no console
+
+    //     const categoriaCell = linha.querySelector('td:nth-child(1)');
+    //     const valorCell = linha.querySelector('td:nth-child(2)');
+
+    //     if (categoriaCell && valorCell) {
+    //       const categoria = categoriaCell.innerText.trim(); // Pega o texto da primeira célula (categoria)
+    //       const valor = valorCell.innerText.trim(); // Pega o texto da segunda célula (valor)
+    //       mensagem += `${categoria}: ${valor}.\n\n`; // Formata a mensagem
+    //     }
+    //   });
+
+    //   if (mensagem) {
+    //     // Cria a URL do WhatsApp com o conteúdo da tabela
+    //     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(mensagem)}`;
+    //     window.open(whatsappUrl, '_blank');
+    //   } else {
+    //     alert('Nenhum conteúdo para compartilhar.');
+    //   }
+    // }
+  </script>
+</body>
+
+</html>
