@@ -250,20 +250,45 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  selecionarTipo.onclick = function () {
-    if (select.value === "Veículos") {
-      console.log("Removemos os Imóveis da tabela.");
-      $(".imoveis").closest("tr").addClass("disabled");
-      $(".veiculos").closest("tr").removeClass("disabled");
-    } else if (select.value === "Imóveis") {
-      console.log("Removemos os Veículos da tabela.");
-      $(".veiculos").closest("tr").addClass("disabled");
-      $(".imoveis").closest("tr").removeClass("disabled");
-    } else if (select.value === "Todos") {
-      console.log("Todos os itens estão disponíveis.");
-      $(".veiculos").closest("tr").removeClass("disabled");
-      $(".imoveis").closest("tr").removeClass("disabled");
-      return;
-    }
-  };
+  const imoveisFilterButton = document.querySelector(".imoveisFilterButton");
+  const autoFilterButton = document.querySelector(".autoFilterButton");
+  const tipeOfProperty = document.querySelector(".tipeOfProperty");
+  
+  
+
+  imoveisFilterButton.addEventListener("click", function () {
+    const auto = document.querySelectorAll(".auto");
+    const imoveis = document.querySelectorAll(".imovel");
+    auto.forEach((auto) => {
+      if (auto.classList.contains("disabled")) {
+        auto.classList.remove("disabled");
+        autoFilterButton.style.opacity = 1;
+        autoFilterButton.style.pointerEvents = "all";
+        tipeOfProperty.innerHTML = "Selecione o tipo:"
+
+      } else {
+        auto.classList.add("disabled");
+        autoFilterButton.style.opacity = 0.5;
+        autoFilterButton.style.pointerEvents = "none";
+        tipeOfProperty.innerHTML = "Somente imóveis:"
+      }
+    });
+  });
+  
+  autoFilterButton.addEventListener("click", function () {
+    const imoveis = document.querySelectorAll(".imovel");
+    imoveis.forEach((imovel) => {
+      if (imovel.classList.contains("disabled")) {
+        imovel.classList.remove("disabled");
+        imoveisFilterButton.style.opacity = 1;
+        imoveisFilterButton.style.pointerEvents = "all";
+        tipeOfProperty.innerHTML = "Selecione o tipo:"
+      } else {
+        imovel.classList.add("disabled");
+        imoveisFilterButton.style.opacity = 0.5;
+        imoveisFilterButton.style.pointerEvents = "none";
+        tipeOfProperty.innerHTML = "Somente automóveis:"
+      }
+    });
+  });
 });

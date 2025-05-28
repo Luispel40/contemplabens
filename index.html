@@ -54,12 +54,7 @@
                 </div>
             </div class="container">
 
-            <!--Pesquisa global-->
             <div class="container valorEntrada">
-                <!--Filtros de valor.-->
-
-
-
                 <div class="pesquisa">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input id="searchInput" type="text" placeholder="Pesquisar Administradora...">
@@ -70,12 +65,17 @@
                 <div class="container">
                     <p>O que você precisa?</p>
                     <div class="selects">
-                        <select id="select" name="select">
-                            <option value="Todos">Todos</option>
-                            <option value="Veículos">Veículos</option>
-                            <option value="Imóveis">Imóveis</option>
-                        </select>
-                        <button class="selecionarTipo" onclick="selecionarTipo()">Selecionar</button>
+                        <h3 class="tipeOfProperty">Selecione o tipo:</h3>
+                        <div class="houseOrCar">
+                            <button class="imoveisFilterButton"
+                            >
+                            <img src="/img/house-floor-svgrepo-com.svg" alt="">
+                        </button>
+                        <button class="autoFilterButton"
+                        >
+                            <img src="/img/car-svgrepo-com.svg" alt="">
+                        </button>
+                        </div>
                     </div>
 
                 </div>
@@ -470,31 +470,7 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            selecionarTipo.onclick = function () {
-                const rows = $(".waffle tr");
-
-                if (select.value === "Veículos") {
-                    rows.each(function (index) {
-                        if (index === 1) return; // Ignora a primeira linha
-                        if (!$(this).hasClass('veículos')) {
-                            $(this).addClass('disabled');
-                        } else {
-                            $(this).removeClass('disabled');
-                        }
-                    });
-                } else if (select.value === "Imóveis") {
-                    rows.each(function (index) {
-                        if (index === 1) return; // Ignora a primeira linha
-                        if (!$(this).hasClass('imóveis')) {
-                            $(this).addClass('disabled');
-                        } else {
-                            $(this).removeClass('disabled');
-                        }
-                    });
-                } else if (select.value === "Todos") {
-                    rows.removeClass('disabled');
-                }
-            };
+            
 
 
 
@@ -513,11 +489,6 @@
 
 
         };
-
-
-
-
-
 
         function parseCurrency(value) {
             if (typeof value === 'string' && value.trim() !== '') {
