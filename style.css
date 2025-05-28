@@ -248,10 +248,7 @@
            border: 5px solid #000 !important;
            border-radius: 50% !important;
            padding: 20px;
-
-           &.selected {
-               border: 5px solid #fff !important;
-           }
+           transition: .3s;
 
            & img {
                width: 100% !important;

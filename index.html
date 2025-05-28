@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,12 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css" integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
+        integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
+        integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
@@ -67,14 +72,12 @@
                     <div class="selects">
                         <h3 class="tipeOfProperty">Selecione o tipo:</h3>
                         <div class="houseOrCar">
-                            <button class="imoveisFilterButton"
-                            >
-                            <img src="/img/house-floor-svgrepo-com.svg" alt="">
-                        </button>
-                        <button class="autoFilterButton"
-                        >
-                            <img src="/img/car-svgrepo-com.svg" alt="">
-                        </button>
+                            <button class="imoveisFilterButton">
+                                <img src="/img/house-floor-svgrepo-com.svg" alt="">
+                            </button>
+                            <button class="autoFilterButton">
+                                <img src="/img/car-svgrepo-com.svg" alt="">
+                            </button>
                         </div>
                     </div>
 
@@ -142,7 +145,21 @@
 
                 // Remove a primeira e segunda célula da linha na tabela clonada
                 $(this).find('th:eq(0), td:eq(0)').remove(); // Remove a primeira célula
-                //$(this).find('th:eq(0), td:eq(0)').remove(); // Remove a segunda célula 
+
+                const classList = $(this).attr('class') || '';
+                let rowClass = '';
+
+                if (classList.includes('imovel')) {
+                    rowClass = 'imovel';
+                } else if (classList.includes('auto')) {
+                    rowClass = 'auto';
+                } else if (classList.includes('seguimento')) {
+                    rowClass = 'seguimento';
+                }
+
+                if (rowClass) {
+                    $(this).find('th:eq(0), td:eq(0)').text(rowClass);
+                }
 
                 $(this).find('th, td').each(function () {
                     // Verifica se a célula tem o atributo 'realValue'
@@ -165,33 +182,6 @@
         }
 
 
-        //exclusivo para o csv
-        function copiarETrocarValoresNaTabela() {
-            // Clona a tabela original
-            const tabelaOriginal = document.querySelector('.waffle');
-            const tabelaClone = tabelaOriginal.cloneNode(true);
-
-            // Substitui o innerHTML nas células clonadas
-            const rows = tabelaClone.querySelectorAll('tr');
-            rows.forEach(row => {
-                const cells = row.querySelectorAll('td[realValue]');
-                cells.forEach(cell => {
-                    cell.innerHTML = cell.getAttribute('realValue');
-                });
-
-                // Remove a primeira e segunda célula de cada linha
-                if (row.children.length > 1) {
-                    row.removeChild(row.children[0]); // Remove a primeira célula
-                }
-                if (row.children.length > 1) {
-                    row.removeChild(row.children[0]); // Remove a segunda célula (agora que a primeira já foi removida)
-                }
-            });
-
-            return tabelaClone;
-        }
-
-
         // Exportar para PDF
         function exportTableToPDF(filename) {
             const rows = fetchHTMLTableData();
@@ -206,6 +196,57 @@
 
             doc.save(filename);
         }
+
+
+        //exclusivo para o csv
+        function copiarETrocarValoresNaTabela() {
+            // Clona a tabela original
+            const tabelaOriginal = document.querySelector('.waffle');
+            const tabelaClone = tabelaOriginal.cloneNode(true);
+
+            // Substitui o innerHTML nas células clonadas
+            const rows = tabelaClone.querySelectorAll('tr');
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td[realValue]');
+
+                cells.forEach(cell => {
+                    cell.innerHTML = cell.getAttribute('realValue');
+                });
+
+                // Aqui verificamos as classes da ROW
+                const classList = row.className || '';
+                let rowClass = '';
+
+                if (classList.includes('imovel')) {
+                    rowClass = 'imovel';
+                } else if (classList.includes('auto')) {
+                    rowClass = 'auto';
+                } else if (classList.includes('seguimento')) {
+                    rowClass = 'seguimento';
+                }
+
+                if (rowClass) {
+                    // Adiciona rowClass como texto na terceira célula (índice 2) se existir
+                    if (row.cells.length >= 3) {
+                        row.cells[2].innerText = rowClass;
+                    }
+                }
+
+                // Remove a primeira e segunda célula de cada linha
+                if (row.children.length > 1) {
+                    row.removeChild(row.children[0]); // Remove a primeira célula
+                }
+                if (row.children.length > 1) {
+                    row.removeChild(row.children[0]); // Remove a segunda célula (agora a nova primeira)
+                }
+            });
+
+            return tabelaClone;
+        }
+
+
+
 
         //Exportar para EXCELL
         document.getElementById('exportButton').addEventListener('click', function () {
@@ -283,9 +324,6 @@
 
         document.getElementById('download-csv').addEventListener('click', downloadCSV);
 
-
-
-
     </script>
 
 
@@ -322,7 +360,7 @@
         <button type="button" class="btn btn-primary" id="copyAndShare">Compartilhar no WhatsApp</button>
         <div id="botoes_copia">
             <button id="create_pdf">Gerar PDF</button>
-            <button id="handleCopyResClick" >Copiar Texto</button>
+            <button id="handleCopyResClick">Copiar Texto</button>
         </div>
     </dialog>
 
@@ -470,7 +508,7 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            
+
 
 
 
@@ -840,18 +878,18 @@ ${formattedContent}`;
 
 
 
-        
+
         ////////////////////////////////////////////////
 
 
         $("#handleCopyResClick").click(function () {
             iziToast.show({
                 title: 'Copiado',
-                message: 'para a área de transferencia!' 
+                message: 'para a área de transferencia!'
             });
             var copiedText = res.innerText.replace(/:\n/g, ': ').replace(/\n\n/g, "\n")
             navigator.clipboard.writeText(copiedText)
-            alert("Copiado para área de transferencia!") 
+            alert("Copiado para área de transferencia!")
         })
         ////////////////////////////////////////////////
 
