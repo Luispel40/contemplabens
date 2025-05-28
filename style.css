@@ -235,13 +235,6 @@
 
 
 
-    /* Notificação
-        .iziToast-wrapper{
-            z-index: 9999;
-        } */
-
-
-
     .controles {
         display: flex;
         flex-direction: row;
@@ -264,9 +257,6 @@
         color: #ffffff;
         margin-bottom: 20px;
     }
-
-    /*pesquisar
-	*/
     .pesquisa {
         display: flex;
         width: 100%;
@@ -348,6 +338,15 @@
         padding: 10px;
         height: min(50px, 100%);
         width: 12.5%;
+
+        &:nth-child(3) {
+            text-align: center;
+        }
+
+        & .fa-solid {
+            color: goldenrod;
+            font-size: 20px;
+        }
     }
 
     tr:not(tr:nth-child(1)) {
