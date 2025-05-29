@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png"
+        href="http://designerluiscoms.com/wp-content/uploads/2024/07/logo-contemplabens.webp">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
@@ -46,16 +48,53 @@
             <div class="container apresent">
                 <p>ESTOQUE CONSÓRCIOS CONTEMPLADOS CONTEMPLABENS</p>
 
-                <div class="caixa-toggle">
-                    <label for="minValue">Valor Mínimo:</label>
-                    <input type="range" id="minValue" min="0" max="1000000" step="100" />
-                    <div id="minValueDisplay" class="value-display">0,00</div>
+                <div class="caixa-toggle" id="filter-credit">
+                
+                    <div>
+                        <label for="maxValue-credit">Valor Máximo:</label>
+                        <input type="number" id="maxValue-credit" min="0" max="1000000" step="100" />
+                        <div id="maxValueDisplay-credit" class="value-display">1.000.000,00</div>
+                    </div>
 
-                    <label for="maxValue">Valor Máximo:</label>
-                    <input type="range" id="maxValue" min="0" max="1000000" step="100" />
-                    <div id="maxValueDisplay" class="value-display">1.000.000,00</div>
+                    <div>
+                        <label for="minValue-credit">Valor Mínimo:</label>
+                        <input type="number" id="minValue-credit" min="0" max="1000000" step="100" />
+                        <div id="minValueDisplay-credit" class="value-display">0,00</div>
+                    </div>
 
-                    <button id="filterBtn">Filtrar Entrada</button>
+                    <button id="filterBtn-credit">Filtrar Credito</button>
+                </div>
+
+                <div class="caixa-toggle" id="filter-entry">
+                    <div>
+                        <label for="maxValue-entry">Valor Máximo:</label>
+                        <input type="number" id="maxValue-entry" min="0" max="1000000" step="100" />
+                        <div id="maxValueDisplay-entry" class="value-display">1.000.000,00</div>
+                    </div>
+
+                    <div>
+                        <label for="minValue-entry">Valor Mínimo:</label>
+                        <input type="number" id="minValue-entry" min="0" max="1000000" step="100" />
+                        <div id="minValueDisplay-entry" class="value-display">0,00</div>
+                    </div>
+
+                    <button id="filterBtn-entry">Filtrar Entrada</button>
+                </div>
+
+                <div class="caixa-toggle" id="filter-parts">
+                    <div>
+                        <label for="maxValue">Valor Máximo:</label>
+                        <input type="number" id="maxValue-parts" min="0" max="500" step="10" />
+                        <div id="maxValueDisplay" class="value-display">500</div>
+                    </div>
+                    <div>
+                        <label for="minValue-parts">Valor Mínimo:</label>
+                        <input type="number" id="minValue-parts" min="0" max="500" step="10" />
+                        <div id="minValueDisplay-parts" class="value-display">0</div>
+                    </div>
+
+
+                    <button id="filterBtn-parts">Filtrar Parcelas</button>
                 </div>
             </div class="container">
 
@@ -386,29 +425,19 @@
         </center><br><br>
     </footer>
 
-    <!--script openModal-->
     <script>
 
-
-
-
-        //variaveis globais
 
         const button = document.querySelector(".action")
         const buttonClose = document.querySelector(".btn-close")
         const table = document.querySelector(".waffle")
         const res = document.querySelector('#res')
         const modal = document.querySelector("dialog")
-        var select = document.querySelector("#select");
-        var selecionarTipo = document.querySelector(".selecionarTipo")
-        var veiculos = document.querySelectorAll(".veiculos")
-        var imoveis = document.querySelectorAll(".imoveis")
         var checks = document.querySelectorAll(".checkbox")
         var checksMark = $("input[type=checkbox]:checked")
         const secondCells = document.querySelectorAll("td:nth-child(2)")
         const secondCell = secondCells.innerHTML;
 
-        //Valor que guarda os dados do select adcionado.
 
         var adminNew = [];
         var checksGuard = [];
@@ -418,29 +447,9 @@
         var parcelasEnd;
         var valorDevedorEnd;
 
-
-
-
-        //Valores de JQuery dentro do Javascript
-        /*Aqui estão todas as informações importantes de somas
-        e variáveis guardadas.*/
-
-
-
-
-
-        //quando o documento for aberto.
-
         $(document).ready(function () {
-
-
-
-
             var currentRow = $(this);
             var ADM = currentRow.find("td:eq(2)").html();
-
-
-
 
             $('input[type=checkbox]').on('change', function () {
                 var checks = $("input[type=checkbox]:checked");
@@ -452,8 +461,6 @@
 
                     desSelecionarTodos.style.display = 'block'
 
-
-
                 }
 
                 // Adicionar classe "disableClick" às linhas que não têm a mesma classe da linha pai
@@ -464,14 +471,10 @@
                     }
                 });
 
-                // Remover classe "disableClick" de todas as linhas quando nenhum checkbox estiver marcado, exceto "toggleFilter"
                 if ($("input[type=checkbox]:checked").length === 0) {
                     $("tr").removeClass("disableClick");
                     desSelecionarTodos.style.display = 'none'
                 }
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
             });
 
 
@@ -507,25 +510,13 @@
         });
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-
-
-
-
-
-        });
-
-
         //botão para desmarcar os checks
-
         document.getElementById('deselectAll').onclick = function () {
             var checkboxes = document.querySelectorAll("input[type=checkbox]");
             checkboxes.forEach(function (checkbox) {
                 checkbox.checked = false;
                 $("tr").removeClass("disableClick");
             });
-
-
         };
 
         function parseCurrency(value) {
@@ -547,7 +538,6 @@
         }
 
         button.onclick = function () {
-            console.clear();
 
             var aData = [];
             var checks = $("input[type=checkbox]:checked");
@@ -558,7 +548,7 @@
             $("tr").each(function () {
                 var obj = {};
                 var currentRow = $(this);
-                var Tipo = currentRow.find("td:eq(1)").html();
+                var Tipo = currentRow[0].classList[1];
                 var ADM = currentRow.find("td:eq(2)").html();
                 var Credito = currentRow.find("td:eq(3)").html();
                 var Entrada = currentRow.find("td:eq(4)").html();
@@ -831,13 +821,6 @@ ${formattedContent}`;
             });
         };
 
-
-
-
-
-
-
-
         //botão para fechar a janela de soma
         buttonClose.onclick = function () {
             res.innerHTML = ''
@@ -845,41 +828,16 @@ ${formattedContent}`;
             var aData = '';
         }
 
-
-
         $("#create_pdf").click(function () {
 
             var pdf = new jsPDF();
             var minhaData = new Date()
 
             pdf.fromHTML($('dialog').get(0), 20, 20, {
-
                 'width': 500
-
             });
-
             pdf.save(`cotas_somadas_${minhaData}.pdf`);
-
-
-
-
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ////////////////////////////////////////////////
 
 
         $("#handleCopyResClick").click(function () {
@@ -891,67 +849,42 @@ ${formattedContent}`;
             navigator.clipboard.writeText(copiedText)
             alert("Copiado para área de transferencia!")
         })
-        ////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         $('#copyAndShare').click(function () {
-
-            // Seleciona o HTML do elemento
             var htmlContent = $('#valorCotas').html();
 
-            // Remove todas as tags HTML e preserva as quebras de linha
             var text = htmlContent
-                .replace(/<br\s*\/?>/gi, "\n")  // Substitui <br> por quebras de linha
-                .replace(/<\/p>/gi, "\n\n")  // Adiciona duas quebras de linha no final de cada parágrafo
-                .replace(/<\/div>/gi, "\n\n")  // Adiciona duas quebras de linha no final de cada div
-                .replace(/<[^>]+>/g, "")  // Remove todas as outras tags HTML
-                .replace(/^\s+/gm, "")  // Remove espaços em branco no início de cada linha
-                .replace(/(\n\s+)/g, "\n")  // Remove espaços em branco após quebras de linha
-                .trim();  // Remove espaços em branco desnecessários no início e no fim do texto
+                .replace(/<br\s*\/?>/gi, "\n")
+                .replace(/<\/p>/gi, "\n\n")
+                .replace(/<\/div>/gi, "\n\n")
+                .replace(/<[^>]+>/g, "")
+                .replace(/^\s+/gm, "")
+                .replace(/(\n\s+)/g, "\n")
+                .trim();
 
-            // Adiciona uma linha em branco após a primeira linha
             var lines = text.split("\n");
             if (lines.length > 1) {
-                lines.splice(1, 0, ""); // Adiciona uma linha em branco após a primeira linha
+                lines.splice(1, 0, "");
             }
 
-            // Adiciona uma linha em branco após a quinta linha
             if (lines.length > 5) {
-                lines.splice(6, 0, ""); // Adiciona uma linha em branco após a quinta linha
+                lines.splice(6, 0, "");
             }
-
-            // Adiciona uma linha em branco antes da palavra "Saldo"
             text = lines.join("\n");
             text = text.replace(/\nSaldo/, "\n\nSaldo").replace(/\nVocê/, "\n\nVocê").replace(/Junção de cotas/, "*Junção de cotas*");
 
-            // Criar uma textarea temporária para copiar o texto
             var tempTextarea = document.createElement('textarea');
             tempTextarea.style.position = 'absolute';
             tempTextarea.style.left = '-9999px';
-            tempTextarea.style.whiteSpace = 'pre-wrap'; // Garante a preservação dos espaços em branco e quebras de linha
+            tempTextarea.style.whiteSpace = 'pre-wrap';
             tempTextarea.value = text;
             document.body.appendChild(tempTextarea);
             tempTextarea.select();
             document.execCommand('copy');
             document.body.removeChild(tempTextarea);
 
-            // Abrir WhatsApp com o texto copiado
             var whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(text);
-            window.open(whatsappUrl, '_blank');
+            window.open((whatsappUrl), '_blank');
         });
 
 
@@ -983,16 +916,12 @@ ${formattedContent}`;
 
                 if ($(this).attr("data-value") === "11") {
 
-
-                    ///////////////////////////////////////////////////////////////////////////////////////
-                    // Itera sobre a linha e verifica se tem data value 11
-                    // separa todos os valores de forma organizada para serem calculados.
                     var multiplicadores = [];
                     var valoresMultiplicados = [];
                     var valorTotalMultiplicadores = {};
                     var valorTotalParcelas = {};
 
-                    console.log(parcelasText); // Verifique se parcelasText está correto
+                    console.log(parcelasText);
 
                     newCount = parcelasText.split('+').join('>');
                     newCount2 = newCount.split('x').join('>');
@@ -1017,16 +946,13 @@ ${formattedContent}`;
                     console.log("Array 1:", array1);
                     console.log("Array 2:", array2);
 
-                    // Função para converter formato "00.000,00" para número
                     function convertToNumber(str) {
                         return parseFloat(str.replace(/\./g, '').replace(',', '.'));
                     }
 
-                    // Converte os valores de array1
                     let convertedArray1 = array1.map(convertToNumber);
                     let convertedArray2 = array2.map(Number);
 
-                    // Formata os valores convertidos de array1 de volta ao formato "00.000,00"
                     let formattedArray1 = convertedArray1.map(formatNumber);
 
                     let resultArray = [];
@@ -1039,11 +965,9 @@ ${formattedContent}`;
 
                     console.log("Array de Resultados:", resultArray);
 
-                    // Somar todos os valores de resultArray
                     let total = resultArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
                     let PrazoTotal = convertedArray2.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
-                    // Função para formatar número no formato "00.000,00"
                     function formatNumber(value) {
                         return new Intl.NumberFormat('de-DE', {
                             minimumFractionDigits: 2,
@@ -1075,7 +999,7 @@ ${formattedContent}`;
                         const modalContentHtml = $('.modal-content').html();
                         const encodedHtml = encodeURIComponent(modalContentHtml);
                         //const shareLink = `./share.html?content=${encodedHtml}`;
-                        const shareLink = `https://contemplabenscontemplados.com.br/share?content=${encodedHtml}`;
+                        const shareLink = `./share/?content=${encodedHtml}`;
                         window.open(shareLink, '_blank');
                     });
                 } else {
@@ -1095,7 +1019,7 @@ ${formattedContent}`;
                         const modalContentHtml = $('.modal-content').html();
                         const encodedHtml = encodeURIComponent(modalContentHtml);
                         //const shareLink = `./share.html?content=${encodedHtml}`;
-                        const shareLink = `https://contemplabenscontemplados.com.br/share?content=${encodedHtml}`;
+                        const shareLink = `./share?content=${encodedHtml}`;
                         window.open(shareLink, '_blank');
                     });
                 }
@@ -1113,82 +1037,15 @@ ${formattedContent}`;
             }
 
 
-
-
-
-
-
-
-            //filtrar valor mínimo de entrada.
             function formatCurrency(value) {
                 return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             }
 
-            function parseCurrency(value) {
-                return parseFloat(value.replace(/\./g, '').replace(',', '.'));
-            }
-
-            $(document).ready(function () {
-
-                $('#minValue, #maxValue').on('input', function () {
-                    var minValue = parseFloat($('#minValue').val());
-                    var maxValue = parseFloat($('#maxValue').val());
-
-                    if (minValue > maxValue) {
-                        if ($(this).attr('id') === 'minValue') {
-                            $('#maxValue').val(minValue);
-                            maxValue = minValue;
-                        } else {
-                            $('#minValue').val(maxValue);
-                            minValue = maxValue;
-                        }
-                    }
-
-                    $('#minValueDisplay').text(formatCurrency(minValue));
-                    $('#maxValueDisplay').text(formatCurrency(maxValue));
-                });
-
-                $('#filterBtn').click(function () {
-
-                    // Obter os valores mínimo e máximo
-                    var minValue = parseFloat($('#minValue').val());
-                    var maxValue = parseFloat($('#maxValue').val());
-
-                    // Iterar sobre as linhas da tabela e filtrar com base nos valores da quinta coluna
-                    $('tr').each(function () {
-                        function parseCurrency(value) {
-                            return parseFloat(value.replace(/\./g, '').replace(',', '.'));
-                        }
-                        var cellValue = parseCurrency($(this).find('td:eq(4)').text());
-
-                        if (!isNaN(minValue) && !isNaN(maxValue)) {
-                            if (cellValue < minValue || cellValue > maxValue) {
-                                $(this).hide();
-                            } else {
-                                $(this).show();
-                            }
-                        }
-                    });
-                });
-            });
-
-
-
-
-
-
+            
         });
 
-
-
-
-
-
-
-
-
-
     </script>
+    <script src="filters.js"></script>
     </head>
 
     <body>
@@ -1198,23 +1055,8 @@ ${formattedContent}`;
 
             <div class="modal-content">
                 <button id="shareButton">Compartilhar</button>
-                <!-- Aqui você pode exibir os detalhes da linha selecionada -->
-                <!-- Use jQuery para preencher os valores dinamicamente -->
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
     </body>
-
-
 
 </html>
