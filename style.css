@@ -219,14 +219,32 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            width: 100%;
-            height: 60px;
             background: none !important;
             border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
+            height: 100px !important;
+            width: 100px !important;
+            border-radius: 50% !important;
+            padding: 10px;
+            transition: .3s;
+            border: 5px solid #fff !important;
+
+            & i {
+                font-size: 60px;
+                color: #fff;
+
+            }
+
+            &:hover {
+                transform: scale(1.1);
+                background-image: radial-gradient(circle, transparent, #fff) !important;
+            }
         }
 
+        .selected {
+            border: 5px solid transparent !important;
+        }
 
         .houseOrCar {
             display: flex;
@@ -239,21 +257,6 @@
             border-radius: 10px;
             overflow: hidden;
             padding: 20px;
-        }
-
-        & .imoveisFilterButton,
-        .autoFilterButton {
-            filter: invert(1);
-            height: 100px !important;
-            width: 100px !important;
-            border: 5px solid #000 !important;
-            border-radius: 50% !important;
-            padding: 20px;
-            transition: .3s;
-
-            & img {
-                width: 100% !important;
-            }
         }
     }
 
@@ -504,12 +507,12 @@
     .btn-close {
         font-weight: 900;
         font-family: "montserrat", sans-serif;
-        color: #fff;
-        background-color: red;
+        color: #fff !important;
+        background-color: red !important;
         border: none;
         width: 30px;
         height: 30px;
-        border-radius: 50%;
+        border-radius: 50% !important;
         text-shadow: 2px 2px 2px 5px #000;
         box-shadow: 0 0 5px 1px #00000090;
         position: absolute;
@@ -611,8 +614,8 @@
 
     #copyAndShare {
         margin: 5px auto !important;
-        background-color: rgb(24, 211, 24);
-        color: #ffffff;
+        background-color: #18d318;
+        color: #034d03;
         padding: 5px 10px;
         border-radius: 10px;
         border: none;
@@ -627,28 +630,27 @@
 
     #handleCopyResClick {
         position: fixed;
-        top: 700%;
-        right: 10%;
-        animation: pulse 3s infinite ease alternate;
+        top: 120%;
+        animation: pulse 1s infinite ease alternate;
     }
 
     @keyframes pulse {
 
         0%,
         100% {
-            box-shadow: 0px 0px 0px 0px #ff6600;
+            box-shadow: 0px 0px 0px 0px #00000050;
             transform: scale(1.1);
         }
 
         30%,
         70% {
-            box-shadow: 0px 0px 5px 10px #ec8b0c;
+            box-shadow: 5px 5px 10px 5px #00000050;
             transform: scale(1);
         }
 
         80%,
         99% {
-            box-shadow: 0px 0px 5px 10px #ff000000;
+            box-shadow: 5px 5px 10px 5px #0000;
             transform: scale(1.1);
         }
 
@@ -764,11 +766,11 @@
         & button {
             width: 100%;
             height: min(100px, 100%) !important;
-            background-color: #e4cd00 !important;
+            background-color: #daa520 !important;
             border-radius: 2px;
             padding: 20px 10px !important;
             border: none;
-            color: #000;
+            color: #fff !important;
             font-weight: bold;
             cursor: pointer;
         }
