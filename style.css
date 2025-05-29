@@ -270,11 +270,6 @@
                 color: #fff;
 
             }
-
-            &:hover {
-                transform: scale(1.1);
-                background-image: radial-gradient(circle, transparent, #fff) !important;
-            }
         }
 
         .selected {
@@ -750,6 +745,7 @@
 
         .head {
             width: 100%;
+            padding: 60px 0 0 0;
         }
 
         .controles {
@@ -784,6 +780,12 @@
         border-radius: 10px;
         margin-bottom: 20px;
 
+        & div {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 5px;
+        }
+
         & input {
             width: 100%;
             appearance: initial;
@@ -811,9 +813,7 @@
         }
     }
 
-    .selects {
-        width: 100%;
-    }
+    
 
     .btn-close {
         top: 2px;
