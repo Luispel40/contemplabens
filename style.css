@@ -13,6 +13,41 @@
         background-color: #181818;
     }
 
+    .introduction-animation {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #202020;
+        padding: 100px;
+        z-index: 99999;
+        position: fixed;
+        top: 0;
+        left: 0;
+        
+
+        & img {
+            width: min(100%, 1000px);
+            margin: auto;
+            object-fit: cover;
+            animation: load 2s ease-in-out;
+            opacity: 0;
+        }
+    }
+
+    @keyframes load {
+        0%, 25%, 50%, 100% {
+            opacity: 0;
+        }
+
+        25%, 75% {
+            opacity: 1;
+        }
+    }
+
+
     button:not(.selects button) {
         cursor: pointer;
         background-color: rgb(190, 190, 190);
