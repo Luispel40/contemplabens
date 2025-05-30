@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png"
-        href="http://designerluiscoms.com/wp-content/uploads/2024/07/logo-contemplabens.webp">
+    <link icon="icon" type="image/png"
+        href="https://br258.hostgator.com.br:2083/cpsess9568507953/viewer/home2%2fcont2850%2fpublic_html%2ftabelas%2fimg/Logo-ContemplaBens.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
@@ -54,49 +54,54 @@
 
                 <div class="caixa-toggle" id="filter-credit">
 
-                    <div>
-                        <label for="maxValue-credit">Valor Máximo:</label>
-                        <input type="number" id="maxValue-credit" min="0" max="1000000" step="100" />
-                        <div id="maxValueDisplay-credit" class="value-display">1.000.000,00</div>
-                    </div>
+
 
                     <div>
                         <label for="minValue-credit">Valor Mínimo:</label>
-                        <input type="number" id="minValue-credit" min="0" max="1000000" step="100" />
+                        <input type="number" id="minValue-credit" min="0" max="10000000" step="100" />
                         <div id="minValueDisplay-credit" class="value-display">0,00</div>
+                    </div>
+
+                    <div>
+                        <label for="maxValue-credit">Valor Máximo:</label>
+                        <input type="number" id="maxValue-credit" min="0" max="10000000" step="100" />
+                        <div id="maxValueDisplay-credit" class="value-display">10.000.000,00</div>
                     </div>
 
                     <button id="filterBtn-credit">Filtrar Credito</button>
                 </div>
 
                 <div class="caixa-toggle" id="filter-entry">
-                    <div>
-                        <label for="maxValue-entry">Valor Máximo:</label>
-                        <input type="number" id="maxValue-entry" min="0" max="1000000" step="100" />
-                        <div id="maxValueDisplay-entry" class="value-display">1.000.000,00</div>
-                    </div>
 
                     <div>
                         <label for="minValue-entry">Valor Mínimo:</label>
-                        <input type="number" id="minValue-entry" min="0" max="1000000" step="100" />
+                        <input type="number" id="minValue-entry" min="0" max="5000000" step="100" />
                         <div id="minValueDisplay-entry" class="value-display">0,00</div>
                     </div>
+
+                    <div>
+                        <label for="maxValue-entry">Valor Máximo:</label>
+                        <input type="number" id="maxValue-entry" min="0" max="5000000" step="100" />
+                        <div id="maxValueDisplay-entry" class="value-display">5.000.000,00</div>
+                    </div>
+
 
                     <button id="filterBtn-entry">Filtrar Entrada</button>
                 </div>
 
                 <div class="caixa-toggle" id="filter-parts">
-                    <div>
-                        <label for="maxValue">Valor Máximo:</label>
-                        <input type="number" id="maxValue-parts" min="0" max="500" step="10" />
-                        <div id="maxValueDisplay" class="value-display">500</div>
-                    </div>
+
                     <div>
                         <label for="minValue-parts">Valor Mínimo:</label>
                         <input type="number" id="minValue-parts" min="0" max="500" step="10" />
                         <div id="minValueDisplay-parts" class="value-display">0</div>
                     </div>
 
+                    <div>
+                        <label for="maxValue">Valor Máximo:</label>
+                        <input type="number" id="maxValue-parts" min="0" max="300" step="10" />
+                        <div id="maxValueDisplay-parts" class="value-display">300</div>
+                    </div>
 
                     <button id="filterBtn-parts">Filtrar Parcelas</button>
                 </div>

@@ -20,6 +20,17 @@ $(document).ready(function () {
       }
     }
 
+    if (minValue > 10000000) {
+      minValue = 10000000;
+      $("#minValue-credit").val(minValue);
+    }
+    if (maxValue > 10000000) {
+      maxValue = 10000000;
+      $("#maxValue-credit").val(maxValue);
+    }
+
+    
+
     $("#minValueDisplay-credit").text(formatCurrency(minValue));
     $("#maxValueDisplay-credit").text(formatCurrency(maxValue));
   });
@@ -59,6 +70,15 @@ $(document).ready(function () {
       }
     }
 
+    if (minValue > 5000000) {
+      minValue = 5000000;
+      $("#minValue-entry").val(minValue);
+    }
+    if (maxValue > 5000000) {
+      maxValue = 5000000;
+      $("#maxValue-entry").val(maxValue);
+    }
+
     $("#minValueDisplay-entry").text(formatCurrency(minValue));
     $("#maxValueDisplay-entry").text(formatCurrency(maxValue));
   });
@@ -95,6 +115,15 @@ $(document).ready(function () {
         $("#minValue-parts").val(maxValue);
         minValue = maxValue;
       }
+    }
+
+    if (minValue > 300) {
+      minValue = 300;
+      $("#minValue-parts").val(minValue);
+    }
+    if (maxValue > 300) {
+      maxValue = 300;
+      $("#maxValue-parts").val(maxValue);
     }
 
     $("#minValueDisplay-parts").text(minValue);

@@ -1,21 +1,24 @@
 // Aguarda o carregamento completo do DOM
 document.addEventListener("DOMContentLoaded", async function () {
+  if (!window.location.href.includes("nocache")) {
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = "style.css?v=" + new Date().getTime();
+    document.head.appendChild(css);
+  }
 
-  const introductionAnimation = document.querySelector(".introduction-animation");
+  const introductionAnimation = document.querySelector(
+    ".introduction-animation"
+  );
 
   setTimeout(function () {
     introductionAnimation.animate(
-    [
-      { transform: "translateY(0)" },
-      { transform: "translateY(-100%)" },
-    ],
-    {
-      duration: 1000,
-      fill: "forwards",
-    }
-  );
-
-  
+      [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }],
+      {
+        duration: 1000,
+        fill: "forwards",
+      }
+    );
   }, 2000);
 
   setTimeout(function () {
