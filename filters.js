@@ -7,18 +7,30 @@ function formatCurrency(value) {
 
 $(document).ready(function () {
   $("#minValue-credit, #maxValue-credit").on("input", function () {
-    var minValue = parseFloat($("#minValue-credit").val());
-    var maxValue = parseFloat($("#maxValue-credit").val());
+    let minValue = parseFloat($("#minValue-credit").val());
+    let maxValue = parseFloat($("#maxValue-credit").val());
+    const filterButton = document.getElementById("filterBtn-credit");
 
-     if (minValue > maxValue) {
+    if (minValue > maxValue) {
       if ($(this).attr("id") === "minValue-credit") {
-        $("#maxValue-credit").val(minValue);
-        maxValue = minValue;
+        filterButton.innerHTML = `
+        Filtrar Credito <i class="fa-solid fa-circle-exclamation"></i>
+        <br><span style="font-size: 12px;">O valor m&aacute;ximo deve ser maior que o valor m&iacute;nimo</span>`;
+        filterButton.disabled = true;
       } else {
-        $("#minValue-credit").val(maxValue);
-        minValue = maxValue;
+        filterButton.innerHTML = `
+        Filtrar Credito <i class="fa-solid fa-circle-exclamation"></i>
+        <br><span style="font-size: 12px;">O valor m&aacute;ximo deve ser maior que o valor m&iacute;nimo</span>`;
+        filterButton.disabled = true;
       }
+    } else if (minValue <= maxValue) {
+      filterButton.innerHTML = `Filtrar Credito`;
+      filterButton.disabled = false;
     }
+    //pontuar input automaticamente
+    $("#minValue-credit, #maxValue-credit").on("input", function () {
+      this.value = this.value.replace(/\D/g, "");
+    });
 
     if (minValue > 10000000) {
       minValue = 10000000;
@@ -29,8 +41,6 @@ $(document).ready(function () {
       $("#maxValue-credit").val(maxValue);
     }
 
-    
-
     $("#minValueDisplay-credit").text(formatCurrency(minValue));
     $("#maxValueDisplay-credit").text(formatCurrency(maxValue));
   });
@@ -38,7 +48,6 @@ $(document).ready(function () {
   $("#filterBtn-credit").click(function () {
     var minValue = parseFloat($("#minValue-credit").val());
     var maxValue = parseFloat($("#maxValue-credit").val());
-    console.log(minValue, maxValue);
 
     $("tr").each(function () {
       function parseCurrency(value) {
@@ -59,16 +68,27 @@ $(document).ready(function () {
   $("#minValue-entry, #maxValue-entry").on("input", function () {
     var minValue = parseCurrency($("#minValue-entry").val());
     var maxValue = parseCurrency($("#maxValue-entry").val());
+    const filterButtonEntry = document.getElementById("filterBtn-entry");
 
     if (minValue > maxValue) {
       if ($(this).attr("id") === "minValue-entry") {
-        $("#maxValue-entry").val(minValue);
-        maxValue = minValue;
+        filterButtonEntry.innerHTML = `Filtrar Entrada <i class="fa-solid fa-circle-exclamation"></i>
+        <br><span style="font-size: 12px;">O valor m&aacute;ximo deve ser maior que o valor m&iacute;nimo</span>`;
+        filterButtonEntry.disabled = true;
       } else {
-        $("#minValue-entry").val(maxValue);
-        minValue = maxValue;
+        filterButtonEntry.innerHTML = `Filtrar Entrada <i class="fa-solid fa-circle-exclamation"></i>
+        <br><span style="font-size: 12px;">O valor m&aacute;ximo deve ser maior que o valor m&iacute;nimo</span>`
+        filterButtonEntry.disabled = true;
       }
+    } else if (minValue <= maxValue) {
+      filterButtonEntry.innerHTML = `Filtrar Entrada`;
+      filterButtonEntry.disabled = false;
     }
+    //pontuar input automaticamente
+    $("#minValue-entry, #maxValue-entry").on("input", function () {
+      this.value = this.value.replace(/\D/g, "");
+      this.value = this.value.replace(/(\d)(\d{2})$/, "$1.$2");
+    });
 
     if (minValue > 5000000) {
       minValue = 5000000;
@@ -106,17 +126,26 @@ $(document).ready(function () {
   $("#minValue-parts, #maxValue-parts").on("input", function () {
     var minValue = parseFloat($("#minValue-parts").val());
     var maxValue = parseFloat($("#maxValue-parts").val());
+    const filterButtonParts = document.getElementById("filterBtn-parts");
 
-     if (minValue > maxValue) {
+    if (minValue > maxValue) {
       if ($(this).attr("id") === "minValue-parts") {
-        $("#maxValue-parts").val(minValue);
-        maxValue = minValue;
+        filterButtonParts.innerHTML = `Filtrar Parcelas <i class="fa-solid fa-circle-exclamation"></i>
+        <br><span style="font-size: 12px;">O valor m&aacute;ximo deve ser maior que o valor m&iacute;nimo</span>`;
+        filterButtonParts.disabled = true;
       } else {
-        $("#minValue-parts").val(maxValue);
-        minValue = maxValue;
+        filterButtonParts.innerHTML = `Filtrar Parcelas <i class="fa-solid fa-circle-exclamation"></i>
+        <br><span style="font-size: 12px;">O valor m&aacute;ximo deve ser maior que o valor m&iacute;nimo</span>`;
+        filterButtonParts.disabled = true;
       }
+    } else if (minValue <= maxValue) {
+      filterButtonParts.innerHTML = `Filtrar Parcelas`;
+      filterButtonParts.disabled = false;
     }
-
+    //pontuar input automaticamente
+    $("#minValue-parts, #maxValue-parts").on("input", function () {
+      this.value = this.value.replace(/\D/g, "");
+    });
     if (minValue > 300) {
       minValue = 300;
       $("#minValue-parts").val(minValue);
@@ -126,23 +155,22 @@ $(document).ready(function () {
       $("#maxValue-parts").val(maxValue);
     }
 
-    $("#minValueDisplay-parts").text(minValue);
-    $("#maxValueDisplay-parts").text(maxValue);
+    $("#minValueDisplay-parts").text(formatCurrency(minValue));
+    $("#maxValueDisplay-parts").text(formatCurrency(maxValue));
   });
 
   $("#filterBtn-parts").click(function () {
     var minValue = parseFloat($("#minValue-parts").val());
     var maxValue = parseFloat($("#maxValue-parts").val());
-    console.log(minValue, maxValue);
 
     $("tr").each(function () {
       function parseCurrency(value) {
         return parseFloat(value.replace(/\./g, "").replace(",", "."));
       }
-      var cellValue = Number($(this).find("td:eq(5)").text());
+      var cellValue = Number($(this).find("td:eq(6)").text() || $(this).find("td:nth-child(7)[realvalue]").attr("realvalue").trim());
 
       if (!isNaN(minValue) && !isNaN(maxValue)) {
-        if (cellValue < minValue || cellValue > maxValue) {
+        if (cellValue < minValue || cellValue > maxValue || $(this).closest("tr").is("[realValue]")) {
           $(this).hide();
         } else {
           $(this).show();
@@ -151,3 +179,4 @@ $(document).ready(function () {
     });
   });
 });
+

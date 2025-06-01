@@ -1,29 +1,23 @@
 // Aguarda o carregamento completo do DOM
 document.addEventListener("DOMContentLoaded", async function () {
-  if (!window.location.href.includes("nocache")) {
-    const css = document.createElement("link");
-    css.rel = "stylesheet";
-    css.href = "style.css?v=" + new Date().getTime();
-    document.head.appendChild(css);
-  }
 
-  const introductionAnimation = document.querySelector(
-    ".introduction-animation"
-  );
+  // const introductionAnimation = document.querySelector(
+  //   ".introduction-animation"
+  // );
 
-  setTimeout(function () {
-    introductionAnimation.animate(
-      [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }],
-      {
-        duration: 1000,
-        fill: "forwards",
-      }
-    );
-  }, 2000);
+  // setTimeout(function () {
+  //   introductionAnimation.animate(
+  //     [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }],
+  //     {
+  //       duration: 1000,
+  //       fill: "forwards",
+  //     }
+  //   );
+  // }, 2000);
 
-  setTimeout(function () {
-    introductionAnimation.remove();
-  }, 3000);
+  // setTimeout(function () {
+  //   introductionAnimation.remove();
+  // }, 3000);
 
   try {
     const response = await fetch(
@@ -226,9 +220,17 @@ document.addEventListener("DOMContentLoaded", async function () {
       });
     }
 
+    const isAvaliableYesOrNot = () => {
+      $(".waffle tr td:nth-child(12)").each(function () {
+       const disponibility = $(this).text()
+       $(this).parent().attr("disponibility", disponibility);
+      });
+    }
+
     // Chama a função para adicionar classes e atributos quando o documento estiver pronto
     $(document).ready(function () {
       adicionarClassesTabela();
+      isAvaliableYesOrNot();
     });
   } catch (error) {
     console.error("Erro ao obter o HTML:", error);
