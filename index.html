@@ -53,9 +53,6 @@
                 <p>ESTOQUE CONSÓRCIOS CONTEMPLADOS CONTEMPLABENS</p>
 
                 <div class="caixa-toggle" id="filter-credit">
-
-
-
                     <div>
                         <label for="minValue-credit">Valor Mínimo:</label>
                         <input type="number" id="minValue-credit" min="0" max="10000000" step="100" />
@@ -137,14 +134,16 @@
 
     </section>
 
-    <button id="deselectAll">Desmarcar Todos</button>
-
-
-
-
-    <!--Botão openModal-->
-    <section id="botoes_download">
+    <div class="action-special-buttons">
+        <button id="deselectAll">Desmarcar Todos</button>
         <button class="action">Calcular Tabelas</button>
+    </div>
+
+
+
+
+    <section id="botoes_download">
+        <!--Botão openModal-->
         <!-- Botão de alternância -->
         <button id="toggleExportButtons">Baixar tabela completa.</button>
 
@@ -517,10 +516,12 @@
 
         //botão para desmarcar os checks
         document.getElementById('deselectAll').onclick = function () {
+            const actionSpecialButtons = document.querySelector(".action-special-buttons");
             var checkboxes = document.querySelectorAll("input[type=checkbox]");
             checkboxes.forEach(function (checkbox) {
                 checkbox.checked = false;
                 $("tr").removeClass("disableClick");
+                actionSpecialButtons.style.display = "none";
             });
         };
 

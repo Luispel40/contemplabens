@@ -27,7 +27,7 @@ $(document).ready(function () {
       filterButton.innerHTML = `Filtrar Credito`;
       filterButton.disabled = false;
     }
-    //pontuar input automaticamente
+    
     $("#minValue-credit, #maxValue-credit").on("input", function () {
       this.value = this.value.replace(/\D/g, "");
     });
@@ -41,9 +41,15 @@ $(document).ready(function () {
       $("#maxValue-credit").val(maxValue);
     }
 
-    $("#minValueDisplay-credit").text(formatCurrency(minValue));
-    $("#maxValueDisplay-credit").text(formatCurrency(maxValue));
-  });
+    
+      if ($(this).val() === "") {
+        $(this).val(0);
+        $("#minValueDisplay-credit").text(formatCurrency(0));
+        $("#maxValueDisplay-credit").text(formatCurrency(0));
+      }
+      $("#minValueDisplay-credit").text(formatCurrency(minValue));
+      $("#maxValueDisplay-credit").text(formatCurrency(maxValue));
+    });
 
   $("#filterBtn-credit").click(function () {
     var minValue = parseFloat($("#minValue-credit").val());
@@ -77,7 +83,7 @@ $(document).ready(function () {
         filterButtonEntry.disabled = true;
       } else {
         filterButtonEntry.innerHTML = `Filtrar Entrada <i class="fa-solid fa-circle-exclamation"></i>
-        <br><span style="font-size: 12px;">O valor m&aacute;ximo deve ser maior que o valor m&iacute;nimo</span>`
+        <br><span style="font-size: 12px;">O valor m&aacute;ximo deve ser maior que o valor m&iacute;nimo</span>`;
         filterButtonEntry.disabled = true;
       }
     } else if (minValue <= maxValue) {
@@ -99,8 +105,13 @@ $(document).ready(function () {
       $("#maxValue-entry").val(maxValue);
     }
 
-    $("#minValueDisplay-entry").text(formatCurrency(minValue));
-    $("#maxValueDisplay-entry").text(formatCurrency(maxValue));
+     if ($(this).val() === "") {
+        $(this).val(0);
+        $("#minValueDisplay-entry").text(formatCurrency(0));
+        $("#maxValueDisplay-entry").text(formatCurrency(0));
+      }
+      $("#minValueDisplay-entry").text(formatCurrency(minValue));
+      $("#maxValueDisplay-entry").text(formatCurrency(maxValue));
   });
 
   $("#filterBtn-entry").click(function () {
@@ -155,8 +166,13 @@ $(document).ready(function () {
       $("#maxValue-parts").val(maxValue);
     }
 
-    $("#minValueDisplay-parts").text(formatCurrency(minValue));
-    $("#maxValueDisplay-parts").text(formatCurrency(maxValue));
+     if ($(this).val() === "") {
+        $(this).val(0);
+        $("#minValueDisplay-parts").text(formatCurrency(0));
+        $("#maxValueDisplay-parts").text(formatCurrency(0));
+      }
+      $("#minValueDisplay-parts").text(formatCurrency(minValue));
+      $("#maxValueDisplay-parts").text(formatCurrency(maxValue));
   });
 
   $("#filterBtn-parts").click(function () {
@@ -167,10 +183,17 @@ $(document).ready(function () {
       function parseCurrency(value) {
         return parseFloat(value.replace(/\./g, "").replace(",", "."));
       }
-      var cellValue = Number($(this).find("td:eq(6)").text() || $(this).find("td:nth-child(7)[realvalue]").attr("realvalue").trim());
+      var cellValue = Number(
+        $(this).find("td:eq(6)").text() ||
+          $(this).find("td:nth-child(7)[realvalue]").attr("realvalue").trim()
+      );
 
       if (!isNaN(minValue) && !isNaN(maxValue)) {
-        if (cellValue < minValue || cellValue > maxValue || $(this).closest("tr").is("[realValue]")) {
+        if (
+          cellValue < minValue ||
+          cellValue > maxValue ||
+          $(this).closest("tr").is("[realValue]")
+        ) {
           $(this).hide();
         } else {
           $(this).show();
@@ -179,4 +202,3 @@ $(document).ready(function () {
     });
   });
 });
-

@@ -264,6 +264,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     var estaLinha = $(this);
     var deselectAll = document;
 
+    const specialActionButtons = document.querySelector(".action-special-buttons");
+    if (this.checked >= 1) {
+      specialActionButtons.style.display = "flex";
+    } else {
+      specialActionButtons.style.display = "none";
+    }
+
     // Adicionar classe "disableClick" às linhas que não têm a mesma classe da linha pai
     $("tr").each(function () {
       if ($(this).attr("class") !== estaLinha.closest("tr").attr("class")) {

@@ -410,6 +410,9 @@
         display: none;
     }
 
+    .action-special-buttons {
+        display: none;
+    }
 
     tr {
         &[disponibility="Reservada"] {
