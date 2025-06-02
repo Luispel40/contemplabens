@@ -417,6 +417,7 @@
         }
         &[disponibility="Vendida"] {
             background-color: #b60000;
+            pointer-events: none;
         }
     }
 
