@@ -1,6 +1,5 @@
 // Aguarda o carregamento completo do DOM
 document.addEventListener("DOMContentLoaded", async function () {
-
   const introductionAnimation = document.querySelector(
     ".introduction-animation"
   );
@@ -18,6 +17,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   setTimeout(function () {
     introductionAnimation.remove();
   }, 3000);
+
+  // Função para recarregar o CSS com um parâmetro de "cache busting"
+  function reloadCSS() {
+    const link = document.getElementById("dynamic-css");
+    const baseHref = "style.css";
+    const timestamp = new Date().getTime();
+
+    link.href = `${baseHref}?v=${timestamp}`;
+  }
+
+  
+  reloadCSS();
 
   try {
     const response = await fetch(
@@ -222,10 +233,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const isAvaliableYesOrNot = () => {
       $(".waffle tr td:nth-child(12)").each(function () {
-       const disponibility = $(this).text()
-       $(this).parent().attr("disponibility", disponibility);
+        const disponibility = $(this).text();
+        $(this).parent().attr("disponibility", disponibility);
       });
-    }
+    };
 
     // Chama a função para adicionar classes e atributos quando o documento estiver pronto
     $(document).ready(function () {
@@ -264,7 +275,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     var estaLinha = $(this);
     var deselectAll = document;
 
-    const specialActionButtons = document.querySelector(".action-special-buttons");
+    const specialActionButtons = document.querySelector(
+      ".action-special-buttons"
+    );
     if (this.checked >= 1) {
       specialActionButtons.style.display = "flex";
     } else {
