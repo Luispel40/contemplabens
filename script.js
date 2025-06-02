@@ -1,23 +1,23 @@
 // Aguarda o carregamento completo do DOM
 document.addEventListener("DOMContentLoaded", async function () {
 
-  // const introductionAnimation = document.querySelector(
-  //   ".introduction-animation"
-  // );
+  const introductionAnimation = document.querySelector(
+    ".introduction-animation"
+  );
 
-  // setTimeout(function () {
-  //   introductionAnimation.animate(
-  //     [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }],
-  //     {
-  //       duration: 1000,
-  //       fill: "forwards",
-  //     }
-  //   );
-  // }, 2000);
+  setTimeout(function () {
+    introductionAnimation.animate(
+      [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }],
+      {
+        duration: 1000,
+        fill: "forwards",
+      }
+    );
+  }, 2000);
 
-  // setTimeout(function () {
-  //   introductionAnimation.remove();
-  // }, 3000);
+  setTimeout(function () {
+    introductionAnimation.remove();
+  }, 3000);
 
   try {
     const response = await fetch(

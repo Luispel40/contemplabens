@@ -13,7 +13,7 @@
         background-color: #181818;
     }
 
-    /* .introduction-animation {
+    .introduction-animation {
         width: 100vw;
         height: 100vh;
         display: flex;
@@ -35,7 +35,7 @@
             animation: load 2s ease-in-out;
             opacity: 0;
         }
-    } */
+    }
 
     @keyframes load {
         0%, 25%, 50%, 100% {
