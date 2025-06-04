@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     link.href = `${baseHref}?v=${timestamp}`;
   }
 
-  
   reloadCSS();
 
   try {
@@ -46,14 +45,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     var rows = document.querySelectorAll(".waffle tr");
 
     rows.forEach(function (row) {
-      if (row.children.length > 1) {
+      if (row.childElementCount > 3) {
         var newCell = document.createElement("td");
-
-        // Insere o novo td entre o firstChild e o segundo filho (nth-child(1))
         row.insertBefore(newCell, row.children[1]);
       } else {
-        // Se não houver pelo menos dois filhos, insere o novo td no final
-        row.appendChild(newCell);
+        row.classList.add("demarcation");
       }
     });
 
@@ -77,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     // Formatação de valores
-    $("td")
+    $("td:not(:nth-child(4))")
       .filter(function () {
         return $(this).text().toLowerCase().includes("x");
       })
@@ -233,15 +229,26 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const isAvaliableYesOrNot = () => {
       $(".waffle tr td:nth-child(12)").each(function () {
-        const disponibility = $(this).text();
+        const disponibility = $(this).text().trim();
         $(this).parent().attr("disponibility", disponibility);
       });
+    };
+
+    const tableClassifications = () => {
+      let rowsForGuide;
+      if ($(".waffle tr").children.length >= 5) {
+        rowsForGuide;
+        console.log(rowsForGuide);
+      } else {
+        return;
+      }
     };
 
     // Chama a função para adicionar classes e atributos quando o documento estiver pronto
     $(document).ready(function () {
       adicionarClassesTabela();
       isAvaliableYesOrNot();
+      tableClassifications();
     });
   } catch (error) {
     console.error("Erro ao obter o HTML:", error);
@@ -265,11 +272,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   elementosFiltrados.forEach((celula) => {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.className = "chk checkbox"; // Adicionei a classe "chk checkbox"
-    celula.appendChild(checkbox);
+    checkbox.className = "chk checkbox";
+    if (celula.parentElement.childElementCount > 3) {
+      celula.appendChild(checkbox);
+    }
   });
 
-  //identifica checkbox marcado e desabilita as demais marcas.
   $("input[type=checkbox]").on("change", function () {
     var checks = $("input[type=checkbox]:checked");
     var estaLinha = $(this);
@@ -280,8 +288,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     );
     if (this.checked >= 1) {
       specialActionButtons.style.display = "flex";
-    } else {
-      specialActionButtons.style.display = "none";
+      setTimeout(function () {
+        specialActionButtons.style.bottom = "0px";
+      });
     }
 
     // Adicionar classe "disableClick" às linhas que não têm a mesma classe da linha pai
@@ -294,6 +303,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Remover classe "disableClick" de todas as linhas quando nenhum checkbox estiver marcado
     if ($("input[type=checkbox]:checked").length === 0) {
       $("tr").removeClass("disableClick");
+      specialActionButtons.style.bottom = "-150px";
+      setTimeout(function () {
+        specialActionButtons.style.display = "none";
+      }, 1000);
     }
   });
 

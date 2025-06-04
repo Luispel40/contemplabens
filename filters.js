@@ -5,6 +5,14 @@ function formatCurrency(value) {
   });
 }
 
+const displayFilters = document.querySelector(".displayFilters");
+const showDisplayForEraseAllFilters = () => {
+  setTimeout(function () {
+      displayFilters.style.top = "0px";
+      displayFilters.style.opacity = "1";
+    }, 500);
+}
+
 $(document).ready(function () {
   $("#minValue-credit, #maxValue-credit").on("input", function () {
     let minValue = parseFloat($("#minValue-credit").val());
@@ -27,7 +35,7 @@ $(document).ready(function () {
       filterButton.innerHTML = `Filtrar Credito`;
       filterButton.disabled = false;
     }
-    
+
     $("#minValue-credit, #maxValue-credit").on("input", function () {
       this.value = this.value.replace(/\D/g, "");
     });
@@ -41,17 +49,17 @@ $(document).ready(function () {
       $("#maxValue-credit").val(maxValue);
     }
 
-    
-      if ($(this).val() === "") {
-        $(this).val(0);
-        $("#minValueDisplay-credit").text(formatCurrency(0));
-        $("#maxValueDisplay-credit").text(formatCurrency(0));
-      }
-      $("#minValueDisplay-credit").text(formatCurrency(minValue));
-      $("#maxValueDisplay-credit").text(formatCurrency(maxValue));
-    });
+    if ($(this).val() === "") {
+      $(this).val(0);
+      $("#minValueDisplay-credit").text(formatCurrency(0));
+      $("#maxValueDisplay-credit").text(formatCurrency(0));
+    }
+    $("#minValueDisplay-credit").text(formatCurrency(minValue));
+    $("#maxValueDisplay-credit").text(formatCurrency(maxValue));
+  });
 
   $("#filterBtn-credit").click(function () {
+    showDisplayForEraseAllFilters();
     var minValue = parseFloat($("#minValue-credit").val());
     var maxValue = parseFloat($("#maxValue-credit").val());
 
@@ -105,16 +113,17 @@ $(document).ready(function () {
       $("#maxValue-entry").val(maxValue);
     }
 
-     if ($(this).val() === "") {
-        $(this).val(0);
-        $("#minValueDisplay-entry").text(formatCurrency(0));
-        $("#maxValueDisplay-entry").text(formatCurrency(0));
-      }
-      $("#minValueDisplay-entry").text(formatCurrency(minValue));
-      $("#maxValueDisplay-entry").text(formatCurrency(maxValue));
+    if ($(this).val() === "") {
+      $(this).val(0);
+      $("#minValueDisplay-entry").text(formatCurrency(0));
+      $("#maxValueDisplay-entry").text(formatCurrency(0));
+    }
+    $("#minValueDisplay-entry").text(formatCurrency(minValue));
+    $("#maxValueDisplay-entry").text(formatCurrency(maxValue));
   });
 
   $("#filterBtn-entry").click(function () {
+    showDisplayForEraseAllFilters();
     var minValue = parseFloat($("#minValue-entry").val());
     var maxValue = parseFloat($("#maxValue-entry").val());
 
@@ -157,25 +166,26 @@ $(document).ready(function () {
     $("#minValue-parts, #maxValue-parts").on("input", function () {
       this.value = this.value.replace(/\D/g, "");
     });
-    if (minValue > 300) {
-      minValue = 300;
+    if (minValue > 300000) {
+      minValue = 300000;
       $("#minValue-parts").val(minValue);
     }
-    if (maxValue > 300) {
-      maxValue = 300;
+    if (maxValue > 300000) {
+      maxValue = 300000;
       $("#maxValue-parts").val(maxValue);
     }
 
-     if ($(this).val() === "") {
-        $(this).val(0);
-        $("#minValueDisplay-parts").text(formatCurrency(0));
-        $("#maxValueDisplay-parts").text(formatCurrency(0));
-      }
-      $("#minValueDisplay-parts").text(formatCurrency(minValue));
-      $("#maxValueDisplay-parts").text(formatCurrency(maxValue));
+    if ($(this).val() === "") {
+      $(this).val(0);
+      $("#minValueDisplay-parts").text(formatCurrency(0));
+      $("#maxValueDisplay-parts").text(formatCurrency(0));
+    }
+    $("#minValueDisplay-parts").text(formatCurrency(minValue));
+    $("#maxValueDisplay-parts").text(formatCurrency(maxValue));
   });
 
   $("#filterBtn-parts").click(function () {
+    showDisplayForEraseAllFilters();
     var minValue = parseFloat($("#minValue-parts").val());
     var maxValue = parseFloat($("#maxValue-parts").val());
 
@@ -200,5 +210,45 @@ $(document).ready(function () {
         }
       }
     });
+
+  });
+
+  const allInputs = document.querySelectorAll(
+    "input:not(input[type='checkbox']), #searchInput"
+  );
+
+  allInputs.forEach((input) => {
+    input.addEventListener("input", function () {
+      showDisplayForEraseAllFilters();
+
+      if ($(this).val() === "0") {
+        $(this).val("");
+      }
+    });
+  });
+
+
+  const eraseAllFilters = document.getElementById("eraseAllFilters");
+
+  eraseAllFilters.addEventListener("click", function () {
+    allInputs.forEach((input) => {
+      input.value = "";
+    });
+
+    const cellHide = document.querySelectorAll("tr:not(.demarcation)");
+    cellHide.forEach((cell) => {
+      cell.style.display = "table-row";
+    });
+
+    const imoveisFilterButton = document.querySelector(".imoveisFilterButton");
+    const autoFilterButton = document.querySelector(".autoFilterButton");
+
+    imoveisFilterButton.style.opacity = 1;
+    imoveisFilterButton.style.pointerEvents = "all";
+    autoFilterButton.style.opacity = 1;
+    autoFilterButton.style.pointerEvents = "all";
+
+    this.parentElement.style.top = "-150px";
+    this.parentElement.style.opacity = 0;
   });
 });

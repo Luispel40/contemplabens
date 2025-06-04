@@ -90,14 +90,14 @@
 
                     <div>
                         <label for="minValue-parts">Valor Mínimo:</label>
-                        <input type="number" id="minValue-parts" min="0" max="500" step="10" />
-                        <div id="minValueDisplay-parts" class="value-display">0</div>
+                        <input type="number" id="minValue-parts" min="0" max="300000" step="10" />
+                        <div id="minValueDisplay-parts" class="value-display">0,00</div>
                     </div>
 
                     <div>
                         <label for="maxValue">Valor Máximo:</label>
-                        <input type="number" id="maxValue-parts" min="0" max="300" step="10" />
-                        <div id="maxValueDisplay-parts" class="value-display">300</div>
+                        <input type="number" id="maxValue-parts" min="0" max="300000" step="10" />
+                        <div id="maxValueDisplay-parts" class="value-display">300.000,00</div>
                     </div>
 
                     <button id="filterBtn-parts" disabled>Filtrar Parcelas</button>
@@ -134,9 +134,13 @@
 
     </section>
 
+    <div class="displayFilters">
+        <button id="eraseAllFilters">Limpar Filtros</button>
+    </div>
+
     <div class="action-special-buttons">
         <button id="deselectAll">Desmarcar Todos</button>
-        <button class="action">Calcular Tabelas</button>
+        <button class="action" id="acrion">Calcular Tabelas</button>
     </div>
 
 
