@@ -417,18 +417,17 @@
 
 
     .demarcation {
-        display: flex;
         background-color: #000;
-        color: #fff;
+        color: #ffe600;
         text-align: center;
         font-weight: 600;
         font-size: 12px;
         pointer-events: none;
         width: 100% !important;
+        height: 30px !important;
 
         & th, td {
-        width: 110% !important;
-        height: 60px !important;
+        height: 30px !important;
         border: none !important;
         }
     }
@@ -511,11 +510,16 @@
             writing-mode: vertical-rl;
             height: auto;
         }
+        
     }
 
     td:nth-child(7) {
         text-align: center !important;
         max-width: 40px;
+    }
+
+    td:nth-child(12) {
+        display: none;
     }
 
 
