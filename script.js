@@ -159,9 +159,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         console.log(primeiraCelula.text());
 
-        if (primeiraCelula.text() == "Imovel") {
+        if (primeiraCelula.text().replace(/\s+/g, "") == "Imovel") {
           primeiraCelula.html(`<i class="fa-solid fa-house"></i>`);
-        } else if (primeiraCelula.text() == "Auto") {
+        } else if (primeiraCelula.text().replace(/\s+/g, "") == "Auto") {
           primeiraCelula.html(`<i class="fa-solid fa-car"></i>`);
         } else if (primeiraCelula.text() == "Seguimento") {
           primeiraCelula.html(`<i class="fa-solid fa-gears"></i>`);
