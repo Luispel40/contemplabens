@@ -80,8 +80,8 @@ $(document).ready(function () {
   });
 
   $("#minValue-entry, #maxValue-entry").on("input", function () {
-    var minValue = parseCurrency($("#minValue-entry").val());
-    var maxValue = parseCurrency($("#maxValue-entry").val());
+    var minValue = parseFloat($("#minValue-entry").val());
+    var maxValue = parseFloat($("#maxValue-entry").val());
     const filterButtonEntry = document.getElementById("filterBtn-entry");
 
     if (minValue > maxValue) {
@@ -98,11 +98,7 @@ $(document).ready(function () {
       filterButtonEntry.innerHTML = `Filtrar Entrada`;
       filterButtonEntry.disabled = false;
     }
-    //pontuar input automaticamente
-    $("#minValue-entry, #maxValue-entry").on("input", function () {
-      this.value = this.value.replace(/\D/g, "");
-      this.value = this.value.replace(/(\d)(\d{2})$/, "$1.$2");
-    });
+    
 
     if (minValue > 5000000) {
       minValue = 5000000;

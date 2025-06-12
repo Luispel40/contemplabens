@@ -157,7 +157,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         $(this).addClass(classeSegundaCelula);
         $(this).addClass(classePrimeiraCelula);
 
-        console.log(primeiraCelula.text());
 
         if (primeiraCelula.text().replace(/\s+/g, "") == "Imovel") {
           primeiraCelula.html(`<i class="fa-solid fa-house"></i>`);
@@ -238,7 +237,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       let rowsForGuide;
       if ($(".waffle tr").children.length >= 5) {
         rowsForGuide;
-        console.log(rowsForGuide);
       } else {
         return;
       }
