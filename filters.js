@@ -25,23 +25,39 @@ let counters = [
 ];
 
 const createFiltersOnTableCells = () => {
-  const creditMin = document.getElementById("minValue-credit").value;
-  const creditMax = document.getElementById("maxValue-credit").value;
-  const entryMin = document.getElementById("minValue-entry").value;
-  const entryMax = document.getElementById("maxValue-entry").value;
-  const partsMin = document.getElementById("minValue-parts").value;
-  const partsMax = document.getElementById("maxValue-parts").value;
+  $("tr").each(function () {
+    function parseCurrency(value) {
+      return parseFloat(value.replace(/\./g, "").replace(",", "."));
+    }
+    var cellValueForCredit = parseCurrency($(this).find("td:eq(3)").text());
+    var cellValueForEntry = parseCurrency($(this).find("td:eq(4)").text());
+    let cellValueForParts = parseCurrency($(this).find("td:eq(6)").text());
 
-  console.log(creditMin, creditMax, entryMin, entryMax, partsMin, partsMax);
-}
-
-
-
-
+    if (
+      !isNaN(counters[0].creditMin) &&
+      !isNaN(counters[0].creditMax) &&
+      !isNaN(counters[0].entryMin) &&
+      !isNaN(counters[0].entryMax) &&
+      !isNaN(counters[0].partsMin) &&
+      !isNaN(counters[0].partsMax)
+    ) {
+      //filter all rows, except the ones that don't match or don't have a value
+      if (
+        cellValueForCredit < counters[0].creditMin && counters[0].creditMax !== 0 ||
+        cellValueForCredit > counters[0].creditMax && counters[0].creditMin !== 0 ||
+        cellValueForEntry < counters[0].entryMin && counters[0].entryMax !== 0 ||
+        cellValueForEntry > counters[0].entryMax && counters[0].entryMin !== 0 ||
+        cellValueForParts < counters[0].partsMin && counters[0].partsMax !== 0 ||
+        cellValueForParts > counters[0].partsMax && counters[0].partsMin !== 0
+      ) {
+        $(this).hide();
+      }
+    }
+  });
+};
 
 $(document).ready(function () {
   $("#minValue-credit, #maxValue-credit").on("input", function () {
-    
     let minValue = parseFloat($("#minValue-credit").val());
     let maxValue = parseFloat($("#maxValue-credit").val());
     const filterButton = document.getElementById("filterBtn-credit");
@@ -92,21 +108,8 @@ $(document).ready(function () {
     console.log(counters);
 
     $("tr").each(function () {
-      function parseCurrency(value) {
-        return parseFloat(value.replace(/\./g, "").replace(",", "."));
-      }
-      var cellValue = parseCurrency($(this).find("td:eq(3)").text());
 
-      if (!isNaN(counters[0].creditMin) && !isNaN(counters[0].creditMax)) {
-        if (cellValue < counters[0].creditMin || cellValue > counters[0].creditMax) {
-          $(this).hide();
-        } else if (
-          cellValue >= counters[0].creditMin &&
-          cellValue <= counters[0].creditMax
-        ) {
-          $(this).show();
-        }
-      }
+      createFiltersOnTableCells();
     });
   });
 
@@ -150,22 +153,15 @@ $(document).ready(function () {
 
   $("#filterBtn-entry").click(function () {
     showDisplayForEraseAllFilters();
-    var minValue = parseFloat($("#minValue-entry").val());
-    var maxValue = parseFloat($("#maxValue-entry").val());
+    counters[0].entryMin = parseFloat($("#minValue-entry").val());
+    counters[0].entryMax = parseFloat($("#maxValue-entry").val());
+    console.log(counters);
 
     $("tr").each(function () {
       function parseCurrency(value) {
         return parseFloat(value.replace(/\./g, "").replace(",", "."));
       }
-      var cellValue = parseCurrency($(this).find("td:eq(4)").text());
-
-      if (!isNaN(minValue) && !isNaN(maxValue)) {
-        if (cellValue < minValue || cellValue > maxValue) {
-          $(this).hide();
-        } else {
-          $(this).show();
-        }
-      }
+      createFiltersOnTableCells();
     });
   });
 
@@ -212,29 +208,17 @@ $(document).ready(function () {
 
   $("#filterBtn-parts").click(function () {
     showDisplayForEraseAllFilters();
-    var minValue = parseFloat($("#minValue-parts").val());
-    var maxValue = parseFloat($("#maxValue-parts").val());
+    counters[0].partsMin = parseFloat($("#minValue-parts").val());
+    counters[0].partsMax = parseFloat($("#maxValue-parts").val());
+    console.log(counters); 
 
     $("tr").each(function () {
-      function parseCurrency(value) {
-        return parseFloat(value.replace(/\./g, "").replace(",", "."));
-      }
-      var cellValue = Number(
-        $(this).find("td:eq(6)").text() ||
-          $(this).find("td:nth-child(7)[realvalue]").attr("realvalue").trim()
+      const realValueAttr = $(this).find("td:eq(6)").attr("data-real-value");
+      cellValueForParts = parseFloat(
+        $(this).find("td:eq(6)").text() || (realValueAttr ? realValueAttr.trim() : '')
       );
 
-      if (!isNaN(minValue) && !isNaN(maxValue)) {
-        if (
-          cellValue < minValue ||
-          cellValue > maxValue ||
-          $(this).closest("tr").is("[realValue]")
-        ) {
-          $(this).hide();
-        } else {
-          $(this).show();
-        }
-      }
+      createFiltersOnTableCells();
     });
   });
 
