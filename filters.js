@@ -8,13 +8,40 @@ function formatCurrency(value) {
 const displayFilters = document.querySelector(".displayFilters");
 const showDisplayForEraseAllFilters = () => {
   setTimeout(function () {
-      displayFilters.style.top = "0px";
-      displayFilters.style.opacity = "1";
-    }, 500);
+    displayFilters.style.top = "0px";
+    displayFilters.style.opacity = "1";
+  }, 500);
+};
+
+let counters = [
+  {
+    creditMin: 0,
+    creditMax: 0,
+    entryMin: 0,
+    entryMax: 0,
+    partsMin: 0,
+    partsMax: 0,
+  },
+];
+
+const createFiltersOnTableCells = () => {
+  const creditMin = document.getElementById("minValue-credit").value;
+  const creditMax = document.getElementById("maxValue-credit").value;
+  const entryMin = document.getElementById("minValue-entry").value;
+  const entryMax = document.getElementById("maxValue-entry").value;
+  const partsMin = document.getElementById("minValue-parts").value;
+  const partsMax = document.getElementById("maxValue-parts").value;
+
+  console.log(creditMin, creditMax, entryMin, entryMax, partsMin, partsMax);
 }
+
+
+
+
 
 $(document).ready(function () {
   $("#minValue-credit, #maxValue-credit").on("input", function () {
+    
     let minValue = parseFloat($("#minValue-credit").val());
     let maxValue = parseFloat($("#maxValue-credit").val());
     const filterButton = document.getElementById("filterBtn-credit");
@@ -60,8 +87,9 @@ $(document).ready(function () {
 
   $("#filterBtn-credit").click(function () {
     showDisplayForEraseAllFilters();
-    var minValue = parseFloat($("#minValue-credit").val());
-    var maxValue = parseFloat($("#maxValue-credit").val());
+    counters[0].creditMin = parseFloat($("#minValue-credit").val());
+    counters[0].creditMax = parseFloat($("#maxValue-credit").val());
+    console.log(counters);
 
     $("tr").each(function () {
       function parseCurrency(value) {
@@ -69,10 +97,13 @@ $(document).ready(function () {
       }
       var cellValue = parseCurrency($(this).find("td:eq(3)").text());
 
-      if (!isNaN(minValue) && !isNaN(maxValue)) {
-        if (cellValue < minValue || cellValue > maxValue) {
+      if (!isNaN(counters[0].creditMin) && !isNaN(counters[0].creditMax)) {
+        if (cellValue < counters[0].creditMin || cellValue > counters[0].creditMax) {
           $(this).hide();
-        } else {
+        } else if (
+          cellValue >= counters[0].creditMin &&
+          cellValue <= counters[0].creditMax
+        ) {
           $(this).show();
         }
       }
@@ -98,7 +129,6 @@ $(document).ready(function () {
       filterButtonEntry.innerHTML = `Filtrar Entrada`;
       filterButtonEntry.disabled = false;
     }
-    
 
     if (minValue > 5000000) {
       minValue = 5000000;
@@ -206,7 +236,6 @@ $(document).ready(function () {
         }
       }
     });
-
   });
 
   const allInputs = document.querySelectorAll(
@@ -223,6 +252,14 @@ $(document).ready(function () {
     });
   });
 
+  const resetCounters = () => {
+    counters[0].entryMin = 0;
+    counters[0].entryMax = 0;
+    counters[0].creditMin = 0;
+    counters[0].creditMax = 0;
+    counters[0].partsMin = 0;
+    counters[0].partsMax = 0;
+  };
 
   const eraseAllFilters = document.getElementById("eraseAllFilters");
 
@@ -230,6 +267,9 @@ $(document).ready(function () {
     allInputs.forEach((input) => {
       input.value = "";
     });
+
+    resetCounters();
+    console.log(counters);
 
     const cellHide = document.querySelectorAll("tr:not(.demarcation)");
     cellHide.forEach((cell) => {

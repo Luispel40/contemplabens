@@ -4,19 +4,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     ".introduction-animation"
   );
 
-  setTimeout(function () {
-    introductionAnimation.animate(
-      [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }],
-      {
-        duration: 1000,
-        fill: "forwards",
-      }
-    );
-  }, 2000);
+  // setTimeout(function () {
+  //   introductionAnimation.animate(
+  //     [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }],
+  //     {
+  //       duration: 1000,
+  //       fill: "forwards",
+  //     }
+  //   );
+  // }, 2000);
 
-  setTimeout(function () {
-    introductionAnimation.remove();
-  }, 3000);
+  // setTimeout(function () {
+  //   introductionAnimation.remove();
+  // }, 3000);
 
   // Função para recarregar o CSS com um parâmetro de "cache busting"
   function reloadCSS() {
