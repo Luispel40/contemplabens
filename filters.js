@@ -1,3 +1,11 @@
+const activateLoadScreen = () => {
+  const isLoading = document.querySelector(".isLoading");
+  isLoading.style.opacity = 1;
+  setTimeout(() => {
+    isLoading.style.opacity = 0;
+  }, 5000);
+}
+
 function formatCurrency(value) {
   return value.toLocaleString("pt-BR", {
     minimumFractionDigits: 2,
@@ -23,6 +31,9 @@ let counters = [
     partsMax: 0,
   },
 ];
+
+
+
 
 const createFiltersOnTableCells = () => {
   $("tr").each(function () {
@@ -102,6 +113,7 @@ $(document).ready(function () {
   });
 
   $("#filterBtn-credit").click(function () {
+    activateLoadScreen();
     showDisplayForEraseAllFilters();
     counters[0].creditMin = parseFloat($("#minValue-credit").val());
     counters[0].creditMax = parseFloat($("#maxValue-credit").val());
@@ -152,6 +164,7 @@ $(document).ready(function () {
   });
 
   $("#filterBtn-entry").click(function () {
+    activateLoadScreen();
     showDisplayForEraseAllFilters();
     counters[0].entryMin = parseFloat($("#minValue-entry").val());
     counters[0].entryMax = parseFloat($("#maxValue-entry").val());
@@ -207,6 +220,7 @@ $(document).ready(function () {
   });
 
   $("#filterBtn-parts").click(function () {
+    activateLoadScreen();
     showDisplayForEraseAllFilters();
     counters[0].partsMin = parseFloat($("#minValue-parts").val());
     counters[0].partsMax = parseFloat($("#maxValue-parts").val());
@@ -272,3 +286,4 @@ $(document).ready(function () {
     this.parentElement.style.opacity = 0;
   });
 });
+

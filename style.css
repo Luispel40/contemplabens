@@ -765,6 +765,46 @@
         display: none;
     }
 
+    .isLoading {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999999;
+        display: flex;
+        background-color: #00000090;
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        opacity: 0;
+        transition: .5s;
+        pointer-events: none;
+
+        & p {
+            color: #fff;
+        }
+
+        & i {
+            font-size: 50px;
+            color: #fff;
+            animation: loading 1s infinite linear;
+        }
+    }
+
+    @keyframes loading {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
     @media (max-width: 767px) {
 
         .controles .cont {
