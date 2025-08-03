@@ -28,21 +28,66 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   reloadCSS();
+  const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfaFHS3UiNr1svMNMWPgUYsP9Dvcv40S_pSkYp1SQgTAjnYVEDgw2E4VSldyFolAv2BzimJmIwapJ2/pub?output=csv";
 
   try {
-    const response = await fetch(
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfaFHS3UiNr1svMNMWPgUYsP9Dvcv40S_pSkYp1SQgTAjnYVEDgw2E4VSldyFolAv2BzimJmIwapJ2/pubhtml?gid=0&single=true"
-    );
-    const html = await response.text();
+    const response = await fetch(urlCSV);
+    const csvText = await response.text();
 
-    const tempElement = document.createElement("div");
-    tempElement.innerHTML = html;
-    const elementoRitz = tempElement.querySelector(".ritz");
+    const linhas = csvText.trim().split("\n");
+    const tabelaDados = linhas.map(line => line.split(","));
 
+    // Criar a div .ritz e tabela .waffle
+    const divRitz = document.createElement("div");
+    divRitz.classList.add("ritz");
+
+    const tabela = document.createElement("table");
+    tabela.classList.add("waffle");
+
+    // Número total de colunas do CSV
+    const numColunas = tabelaDados[0].length;
+
+    // Montar thead com células vazias (colunas + 1 por causa do th extra)
+    const thead = document.createElement("thead");
+    const trHead = document.createElement("tr");
+
+    for (let i = 0; i <= numColunas; i++) {
+      const th = document.createElement("th");
+      th.textContent = ""; // célula vazia
+      trHead.appendChild(th);
+    }
+    thead.appendChild(trHead);
+    tabela.appendChild(thead);
+
+    // Montar tbody com todos os dados, inclusive a antiga "linha cabeçalho"
+    const tbody = document.createElement("tbody");
+    for(let i=0; i < tabelaDados.length; i++) {  // começa do zero, pega todas as linhas
+      const tr = document.createElement("tr");
+
+      // Criar <th> vazio no início de cada linha do tbody
+      const thLinhaVazio = document.createElement("th");
+      thLinhaVazio.textContent = "";
+      tr.appendChild(thLinhaVazio);
+
+      // Criar as células td para essa linha
+      tabelaDados[i].forEach(celula => {
+        const td = document.createElement("td");
+        td.textContent = celula;
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    }
+    tabela.appendChild(tbody);
+
+    divRitz.appendChild(tabela);
+
+    // Inserir no container principal (limpando o que tinha antes)
     const paiDaTabela = document.querySelector(".tabela");
-    paiDaTabela.appendChild(elementoRitz);
+    paiDaTabela.innerHTML = "";
+    paiDaTabela.appendChild(divRitz);
 
-    var rows = document.querySelectorAll(".waffle tr");
+    // Executar seu código para manipular linhas, caso queira manter
+    const rows = paiDaTabela.querySelectorAll(".waffle tr");
 
     rows.forEach(function (row) {
       if (row.childElementCount > 3) {

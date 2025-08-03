@@ -416,6 +416,8 @@
     }
 
 
+
+
     .demarcation {
         background-color: #000;
         color: #ffe600;
@@ -516,6 +518,9 @@
     td:nth-child(7) {
         text-align: center !important;
         max-width: 40px;
+    }
+    td:nth-child(12), td:nth-child(13), td:nth-child(14), td:nth-child(15) {
+        display: none; 
     }
 
 
