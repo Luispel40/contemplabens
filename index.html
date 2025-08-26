@@ -1,172 +1,204 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link icon="icon" type="image/png"
-        href="https://br258.hostgator.com.br:2083/cpsess9568507953/viewer/home2%2fcont2850%2fpublic_html%2ftabelas%2fimg/Logo-ContemplaBens.png">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
-        integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link icon="icon" type="image/png"
+            href="https://br258.hostgator.com.br:2083/cpsess9568507953/viewer/home2%2fcont2850%2fpublic_html%2ftabelas%2fimg/Logo-ContemplaBens.png">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+            integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
-        integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
-        integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
+            integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
+            integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>tabela online</title>
+        <link id="dynamic-css" rel="stylesheet" href="styles.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>tabela online</title>
-    <link id="dynamic-css" rel="stylesheet" href="styles.css">
+        <script src="scripts.js"></script>
 
-    <script src="scripts.js"></script>
+        <body>
 
-<body>
+            <div class="introduction-animation">
+                <img src="img/Logo-ContemplaBens.png" alt>
+            </div>
+            <div class="isLoading">
+                <p>Aplicando filtros</p>
+                <i class="fa-solid fa-spinner"></i>
+            </div>
 
-    <div class="introduction-animation">
-        <img src="img/Logo-ContemplaBens.png" alt="">
-    </div>
-    <div class="isLoading">
-        <p>Aplicando filtros</p>
-        <i class="fa-solid fa-spinner"></i>
-    </div>
+            <header>
+                <section class="head">
+                    <div class="container">
+                        <img
+                            src="http://designerluiscoms.com/wp-content/uploads/2024/07/logo-contemplabens.webp"
+                            alt>
 
-    <header>
-        <section class="head">
-            <div class="container">
-                <img src="http://designerluiscoms.com/wp-content/uploads/2024/07/logo-contemplabens.webp" alt="">
+                    </section>
+                </header>
 
-        </section>
-    </header>
+                <section class="controles">
+                    <div class="cont">
+                        <div class="container apresent">
+                            <p>ESTOQUE CONSÓRCIOS CONTEMPLADOS CONTEMPLABENS</p>
 
-    <section class="controles">
-        <div class="cont">
-            <div class="container apresent">
-                <p>ESTOQUE CONSÓRCIOS CONTEMPLADOS CONTEMPLABENS</p>
+                            <div class="caixa-toggle" id="filter-credit">
+                                <div>
+                                    <label for="minValue-credit">Valor
+                                        Mínimo:</label>
+                                    <input type="number" id="minValue-credit"
+                                        min="0" max="10000000" step="100" />
+                                    <div id="minValueDisplay-credit"
+                                        class="value-display">0,00</div>
+                                </div>
 
-                <div class="caixa-toggle" id="filter-credit">
-                    <div>
-                        <label for="minValue-credit">Valor Mínimo:</label>
-                        <input type="number" id="minValue-credit" min="0" max="10000000" step="100" />
-                        <div id="minValueDisplay-credit" class="value-display">0,00</div>
-                    </div>
+                                <div>
+                                    <label for="maxValue-credit">Valor
+                                        Máximo:</label>
+                                    <input type="number" id="maxValue-credit"
+                                        min="0" max="10000000" step="100" />
+                                    <div id="maxValueDisplay-credit"
+                                        class="value-display">10.000.000,00</div>
+                                </div>
 
-                    <div>
-                        <label for="maxValue-credit">Valor Máximo:</label>
-                        <input type="number" id="maxValue-credit" min="0" max="10000000" step="100" />
-                        <div id="maxValueDisplay-credit" class="value-display">10.000.000,00</div>
-                    </div>
+                                <button id="filterBtn-credit" disabled>Filtrar
+                                    Credito</button>
+                            </div>
 
-                    <button id="filterBtn-credit" disabled>Filtrar Credito</button>
-                </div>
+                            <div class="caixa-toggle" id="filter-entry">
 
-                <div class="caixa-toggle" id="filter-entry">
+                                <div>
+                                    <label for="minValue-entry">Valor
+                                        Mínimo:</label>
+                                    <input type="number" id="minValue-entry"
+                                        min="0" max="5000000" step="100" />
+                                    <div id="minValueDisplay-entry"
+                                        class="value-display">0,00</div>
+                                </div>
 
-                    <div>
-                        <label for="minValue-entry">Valor Mínimo:</label>
-                        <input type="number" id="minValue-entry" min="0" max="5000000" step="100" />
-                        <div id="minValueDisplay-entry" class="value-display">0,00</div>
-                    </div>
+                                <div>
+                                    <label for="maxValue-entry">Valor
+                                        Máximo:</label>
+                                    <input type="number" id="maxValue-entry"
+                                        min="0" max="5000000" step="100" />
+                                    <div id="maxValueDisplay-entry"
+                                        class="value-display">5.000.000,00</div>
+                                </div>
 
-                    <div>
-                        <label for="maxValue-entry">Valor Máximo:</label>
-                        <input type="number" id="maxValue-entry" min="0" max="5000000" step="100" />
-                        <div id="maxValueDisplay-entry" class="value-display">5.000.000,00</div>
-                    </div>
+                                <button id="filterBtn-entry" disabled>Filtrar
+                                    Entrada</button>
+                            </div>
 
+                            <div class="caixa-toggle" id="filter-parts">
 
-                    <button id="filterBtn-entry" disabled>Filtrar Entrada</button>
-                </div>
+                                <div>
+                                    <label for="minValue-parts">Valor
+                                        Mínimo:</label>
+                                    <input type="number" id="minValue-parts"
+                                        min="0" max="300000" step="10" />
+                                    <div id="minValueDisplay-parts"
+                                        class="value-display">0,00</div>
+                                </div>
 
-                <div class="caixa-toggle" id="filter-parts">
+                                <div>
+                                    <label for="maxValue">Valor Máximo:</label>
+                                    <input type="number" id="maxValue-parts"
+                                        min="0" max="300000" step="10" />
+                                    <div id="maxValueDisplay-parts"
+                                        class="value-display">300.000,00</div>
+                                </div>
 
-                    <div>
-                        <label for="minValue-parts">Valor Mínimo:</label>
-                        <input type="number" id="minValue-parts" min="0" max="300000" step="10" />
-                        <div id="minValueDisplay-parts" class="value-display">0,00</div>
-                    </div>
+                                <button id="filterBtn-parts" disabled>Filtrar
+                                    Parcelas</button>
+                            </div>
+                            </div class="container">
 
-                    <div>
-                        <label for="maxValue">Valor Máximo:</label>
-                        <input type="number" id="maxValue-parts" min="0" max="300000" step="10" />
-                        <div id="maxValueDisplay-parts" class="value-display">300.000,00</div>
-                    </div>
+                            <div class="container valorEntrada">
+                                <div class="pesquisa">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input id="searchInput" type="text"
+                                        placeholder="Pesquisar Administradora...">
+                                </div>
 
-                    <button id="filterBtn-parts" disabled>Filtrar Parcelas</button>
-                </div>
-            </div class="container">
+                                <br>
 
-            <div class="container valorEntrada">
-                <div class="pesquisa">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input id="searchInput" type="text" placeholder="Pesquisar Administradora...">
-                </div>
+                                <div class="container">
+                                    <p>O que você precisa?</p>
+                                    <div class="selects">
+                                        <h3 class="tipeOfProperty">Selecione o
+                                            tipo:</h3>
+                                        <div class="houseOrCar">
+                                            <button class="imoveisFilterButton">
+                                                <i
+                                                    class="fa-solid fa-house"></i>
+                                            </button>
+                                            <button class="autoFilterButton">
+                                                <i class="fa-solid fa-car"></i>
+                                            </button>
+                                        </div>
+                                    </div>
 
-                <br>
+                                </div>
 
-                <div class="container">
-                    <p>O que você precisa?</p>
-                    <div class="selects">
-                        <h3 class="tipeOfProperty">Selecione o tipo:</h3>
-                        <div class="houseOrCar">
-                            <button class="imoveisFilterButton">
-                                <i class="fa-solid fa-house"></i>
-                            </button>
-                            <button class="autoFilterButton">
-                                <i class="fa-solid fa-car"></i>
-                            </button>
+                            </div>
                         </div>
                     </div>
 
+                </section>
+
+                <div class="displayFilters">
+                    <button id="eraseAllFilters">Limpar Filtros</button>
                 </div>
 
-            </div>
-        </div>
-        </div>
+                <div class="action-special-buttons">
+                    <button id="deselectAll">Desmarcar Todos</button>
+                    <button class="action" id="acrion">Calcular Tabelas</button>
+                </div>
 
-    </section>
+                <section id="botoes_download">
 
-    <div class="displayFilters">
-        <button id="eraseAllFilters">Limpar Filtros</button>
-    </div>
+                    <button id="toggleExportButtons">Baixar tabela
+                        completa.</button>
 
-    <div class="action-special-buttons">
-        <button id="deselectAll">Desmarcar Todos</button>
-        <button class="action" id="acrion">Calcular Tabelas</button>
-    </div>
+                    <div id="exportButtonsFora">
+                        <div id="exportButtons"
+                            style="transform: translateY(-150px);">
+                            <button
+                                onclick="exportTableToPDF('tabela_contemplabens.pdf')">Baixar
+                                PDF</button>
+                            <button id="exportButton">Baixar Excel</button>
+                            <button id="download-csv">Baixar CSV</button>
+                        </div>
+                    </div>
 
+                </section>
 
-
-
-    <section id="botoes_download">
-
-        <button id="toggleExportButtons">Baixar tabela completa.</button>
-
-        <div id="exportButtonsFora">
-            <div id="exportButtons" style="transform: translateY(-150px);">
-                <button onclick="exportTableToPDF('tabela_contemplabens.pdf')">Baixar PDF</button>
-                <button id="exportButton">Baixar Excel</button>
-                <button id="download-csv">Baixar CSV</button>
-            </div>
-        </div>
-
-
-    </section>
-
-
-    <script>
+                <script>
         document.getElementById('toggleExportButtons').addEventListener('click', function () {
             var exportButtons = document.getElementById('exportButtons');
             var buttonMostrar = document.getElementById('toggleExportButtons');
@@ -378,63 +410,64 @@
 
     </script>
 
-    <dialog>
-        <div id="valorCotas">
-            <h1>Junção de cotas</h1>
-            <div id="res">Aqui vão ficar suas informações de cotas</div>
-            <div class="comissoes">
-            </div>
-        </div>
+                <dialog open>
+                    <div id="valorCotas">
+                        <h1>Junção de cotas</h1>
+                        <div id="res">
+                            Aqui vão ficar suas informações de cotas
+                        </div>
+                        
+                    </div>
 
-        <button class="btn-close">X</button>
-        <p>valor da comissão:<br><span id="result">0</span></p><br>
-        <div class="botoesComissao">
-            <button class="percentInput" value="0">0%</button>
-            <button class="percentInput" value="1">1%</button>
-            <button class="percentInput" value="2">2%</button>
-            <button class="percentInput" value="3">3%</button>
-            <button class="percentInput" value="4">4%</button>
-            <button class="percentInput" value="5">5%</button>
-            <button class="percentInput" value="6">6%</button>
-            <button class="percentInput" value="7">7%</button>
-            <button class="percentInput" value="8">8%</button>
-            <button class="percentInput" value="9">9%</button>
-            <button class="percentInput" value="10">10%</button>
-        </div>
+                    <button class="btn-close">X</button>
+                    <div class="commission-box">
+                        <p>valor da comissão:<br><span
+                                id="result">0</span></p><br>
+                        <div class="botoesComissao">
+                            <button class="percentInput" value="0">0%</button>
+                            <button class="percentInput" value="1">1%</button>
+                            <button class="percentInput" value="2">2%</button>
+                            <button class="percentInput" value="3">3%</button>
+                            <button class="percentInput" value="4">4%</button>
+                            <button class="percentInput" value="5">5%</button>
+                            <button class="percentInput" value="6">6%</button>
+                            <button class="percentInput" value="7">7%</button>
+                            <button class="percentInput" value="8">8%</button>
+                            <button class="percentInput" value="9">9%</button>
+                            <button class="percentInput" value="10">10%</button>
+                        </div>
+                    </div>
 
+                    <button type="button" class="btn btn-primary"
+                        id="copyAndShare">Compartilhar no WhatsApp</button>
+                    <div id="botoes_copia">
+                        <button id="create_pdf">Gerar PDF</button>
+                        <button id="handleCopyResClick">Copiar Texto</button>
+                    </div>
+                </dialog>
 
+                <div class="tabela"></div>
 
+                <footer><br><br>
+                    <center>
+                        <p>
+                            <font color="#fff">CONTEMPLABENS 2024® | TODOS OS
+                                DIREITOS RESERVADOS. <br></br>
+                            CNPJ 26.756.365/0001-34<br><br>
 
-        <button type="button" class="btn btn-primary" id="copyAndShare">Compartilhar no WhatsApp</button>
-        <div id="botoes_copia">
-            <button id="create_pdf">Gerar PDF</button>
-            <button id="handleCopyResClick">Copiar Texto</button>
-        </div>
-    </dialog>
+                            Rua Nuno Álvares Pereira número 600
+                            São José do Rio preto
+                            Estado São Paulo<br><br>
+                            desenvolvido por <a
+                                style="color: rgb(109, 109, 255);"
+                                href="https://designerluiscoms.com/"
+                                target="_blank">Adobra design ®</a></font><br>
 
+                    </p>
+                </center><br><br>
+            </footer>
 
-    <div class="tabela"></div>
-
-
-
-
-    <footer><br><br>
-        <center>
-            <p>
-                <font color="#fff">CONTEMPLABENS 2024® | TODOS OS DIREITOS RESERVADOS. <BR></BR>
-                    CNPJ 26.756.365/0001-34<br><br>
-
-                    Rua Nuno Álvares Pereira número 600
-                    São José do Rio preto
-                    Estado São Paulo<br><br>
-                    desenvolvido por <a style="color: rgb(109, 109, 255);" href="https://designerluiscoms.com/"
-                        target="_blank">Adobra design ®</a></font><br>
-
-            </p>
-        </center><br><br>
-    </footer>
-
-    <script>
+            <script>
 
 
         const button = document.querySelector(".action")
@@ -1056,18 +1089,18 @@ ${formattedContent}`;
         });
 
     </script>
-    <script src="filters.js"></script>
-    </head>
+            <script src="filters.js"></script>
+        </head>
 
-    <body>
+        <body>
 
-        <!-- Modal -->
-        <div class="modal">
+            <!-- Modal -->
+            <div class="modal">
 
-            <div class="modal-content">
-                <button id="shareButton">Compartilhar</button>
+                <div class="modal-content">
+                    <button id="shareButton">Compartilhar</button>
+                </div>
             </div>
-        </div>
-    </body>
+        </body>
 
-</html>
+    </html>

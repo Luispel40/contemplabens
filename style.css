@@ -104,9 +104,10 @@
 
     dialog {
         align-items: start;
-        padding: 50px;
-        min-height: 700px;
+        padding: 50px 20px;
         position: fixed;
+        width: 600px;
+        height: 100vh;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -116,7 +117,6 @@
         gap: 20px;
         box-shadow: 5px 5px 5px #00000070;
         z-index: 99999;
-        overflow: visible;
     }
 
     dialog::-webkit-scrollbar {
@@ -179,10 +179,13 @@
     dialog h1 {
         font-size: 25px;
         text-transform: uppercase;
-        font-weight: 800;
+        font-weight: 600;
         padding-bottom: 15px;
         border-bottom: 1px solid black;
         margin-bottom: 10px;
+        background-color: #fff;
+        position: sticky;
+        top: 0;
     }
 
     #res {
@@ -218,29 +221,24 @@
         }
     }
 
-
-    .comissoes,
-    .comissoes p {
+    .commission-box {
+        position: relative;
+        z-index: 9999;
         display: flex;
-        flex-wrap: nowrap;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        text-align: left;
-        font-size: 18px;
-        margin: 15px;
+        width: 80dvw;
+        overflow: hidden;
+        background-color: #fff;
+
     }
 
-    .comissoes p span {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        font-size: 18px;
-        font-weight: 900;
-    }
+    .botoesComissao {
 
-    .botoesComissoes {
-        display: grid;
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
     }
 
@@ -637,13 +635,18 @@
     #copyAndShare {
         margin: 5px auto !important;
         background-color: #18d318;
-        color: #034d03;
+        color: #ffffff;
         padding: 5px 10px;
         border-radius: 10px;
         border: none;
         position: relative;
         left: 50%;
         transform: translateX(-50%);
+        width: 200px;
+        height: 40px;
+        cursor: pointer;
+        position: fixed;
+        bottom: 20px;
     }
 
     #copyAndShare:hover {
@@ -654,6 +657,21 @@
         position: fixed;
         top: 120%;
         animation: pulse 1s infinite ease alternate;
+    }
+
+    #valorCotas {
+        overflow: auto;
+        width: 100%;
+        height: 80%;
+        padding-bottom: 250px;
+        mask-image:
+            linear-gradient(to bottom, black 10%,
+                black 90%,
+                transparent 100%);
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     @keyframes pulse {
@@ -837,10 +855,12 @@
 
         dialog {
             width: 95%;
-            min-height: 95%;
+            height: 90vh;
+            left: auto;
+            transform: translate(0, -50%);
             margin: 10px;
-            overflow: visible;
             z-index: 99999;
+            overflow: visible;
         }
 
         .ritz {
