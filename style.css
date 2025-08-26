@@ -428,9 +428,10 @@
         width: 100% !important;
         height: 30px !important;
 
-        & th, td {
-        height: 30px !important;
-        border: none !important;
+        & th,
+        td {
+            height: 30px !important;
+            border: none !important;
         }
     }
 
@@ -512,18 +513,13 @@
             writing-mode: vertical-rl;
             height: auto;
         }
-        
+
     }
 
     td:nth-child(7) {
         text-align: center !important;
         max-width: 40px;
     }
-     td:nth-child(13), td:nth-child(14), td:nth-child(15) {
-        display: none; 
-    }
-
-
 
 
     section {

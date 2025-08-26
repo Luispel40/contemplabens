@@ -28,14 +28,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   reloadCSS();
-  const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfaFHS3UiNr1svMNMWPgUYsP9Dvcv40S_pSkYp1SQgTAjnYVEDgw2E4VSldyFolAv2BzimJmIwapJ2/pub?output=csv";
+  const urlCSV = "https://docs.google.com/spreadsheets/d/1bUFgA8qUTXSAC4gqhsUTU25_dMEaKbM3YgWp4yg8tcU/gviz/tq?tqx=out:csv&gid=0";
 
   try {
     const response = await fetch(urlCSV);
     const csvText = await response.text();
 
     const linhas = csvText.trim().split("\n");
-    const tabelaDados = linhas.map(line => line.split(","));
+    const tabelaDados =
+      linhas.map(
+        line => line.split(",").map(
+          cell => cell.replace(/"/g, "")));
 
     // Criar a div .ritz e tabela .waffle
     const divRitz = document.createElement("div");
@@ -70,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       tr.appendChild(thLinhaVazio);
 
       // Criar as células td para essa linha
-      tabelaDados[i].forEach(celula => {
+      tabelaDados[i].slice(0, 10).forEach(celula => {
         const td = document.createElement("td");
         td.textContent = celula;
         tr.appendChild(td);
