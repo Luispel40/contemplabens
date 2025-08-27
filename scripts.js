@@ -28,11 +28,13 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   reloadCSS();
-  const urlCSV = "https://docs.google.com/spreadsheets/d/1bUFgA8qUTXSAC4gqhsUTU25_dMEaKbM3YgWp4yg8tcU/gviz/tq?tqx=out:csv&gid=0";
+  const urlCSV = "https://docs.google.com/spreadsheets/d/1bUFgA8qUTXSAC4gqhsUTU25_dMEaKbM3YgWp4yg8tcU/export?format=csv&gid=0#gid=0";
 
   try {
     const response = await fetch(urlCSV);
     const csvText = await response.text();
+
+    console.log(response);
 
     const linhas = csvText.trim().split("\n");
     const tabelaDados =
