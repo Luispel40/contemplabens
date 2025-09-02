@@ -439,7 +439,7 @@
             background-color: #82ec9d;
 
             & td[realValue]::before {
-                background-color: #82ec9d;
+                background-color: #e69292;
             }
         }
 
@@ -485,11 +485,14 @@
         transition: .3s;
     }
 
-    tr:hover:not(tr:nth-child(1)),
-    tr:hover td[realValue]::before {
+    tr:hover:not(tr:nth-child(1)) {
         transform: scale(1.01);
         background-color: #ffe600;
         cursor: pointer;
+
+        & td[realValue]::before {
+            background-color: #ffe600;
+        }
     }
 
 
@@ -657,6 +660,14 @@
         position: fixed;
         top: 120%;
         animation: pulse 1s infinite ease alternate;
+    }
+
+    tr:nth-child(even) {
+        background-color: #e6e6e6;
+
+        & td[realValue]::before {
+            background-color: #e6e6e6;
+        }
     }
 
     #valorCotas {
