@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     const isAvaliableYesOrNot = () => {
-      $(".waffle tr td:nth-child(12)").each(function () {
+      $(".waffle tr td:nth-child(9)").each(function () {
         const disponibility = $(this).text().trim();
         $(this).parent().attr("disponibility", disponibility);
       });

@@ -436,7 +436,7 @@
 
     tr {
         &[disponibility="Reservada"] {
-            background-color: #82ec9d;
+            background-color: #e69292;
 
             & td[realValue]::before {
                 background-color: #e69292;
@@ -444,11 +444,11 @@
         }
 
         &[disponibility="Vendida"] {
-            background-color: #e05a5a;
+            background-color: #b4808050;
             pointer-events: none;
 
             & td[realValue]::before {
-                background-color: #e05a5a;
+                background-color: #b4808050;
             }
         }
 
