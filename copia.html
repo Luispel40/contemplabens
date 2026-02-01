@@ -1,115 +1,205 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link icon="icon" type="image/png"
+            href="https://br258.hostgator.com.br:2083/cpsess9568507953/viewer/home2%2fcont2850%2fpublic_html%2ftabelas%2fimg/Logo-ContemplaBens.png">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+            integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
 
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
+            integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
+            integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>tabela online</title>
+        <link id="dynamic-css" rel="stylesheet" href="styles.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>tabela online</title>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+        <script src="scripts.js"></script>
 
+        <body>
 
-
-<body>
-
-    <!--Cabeçalho do site.-->
-    <header>
-        <section class="head">
-            <div class="container">
-                <img src="http://designerluiscoms.com/wp-content/uploads/2024/07/logo-contemplabens.webp" alt="">
-
-        </section>
-    </header>
-
-    <section class="controles">
-        <div class="cont">
-            <div class="container apresent">
-                <p>ESTOQUE CONSÓRCIOS CONTEMPLADOS CONTEMPLABENS</p>
-
-                <div class="caixa-toggle">
-                    <label for="minValue">Valor Mínimo:</label>
-                    <input type="range" id="minValue" min="0" max="1000000" step="100" />
-                    <div id="minValueDisplay" class="value-display">0,00</div>
-
-                    <label for="maxValue">Valor Máximo:</label>
-                    <input type="range" id="maxValue" min="0" max="1000000" step="100" />
-                    <div id="maxValueDisplay" class="value-display">1.000.000,00</div>
-
-                    <button id="filterBtn">Filtrar Entrada</button>
-                </div>
-            </div class="container">
-
-            <!--Pesquisa global-->
-            <div class="container valorEntrada">
-                <!--Filtros de valor.-->
-
-
-
-                <div class="pesquisa">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input id="searchInput" type="text" placeholder="Pesquisar Administradora...">
-                </div>
-
-                <br>
-
+            <div class="introduction-animation">
+                <img src="img/Logo-ContemplaBens.png" alt>
                 <div class="container">
                     <p>O que você precisa?</p>
                     <div class="selects">
-                        <select id="select" name="select">
-                            <option value="Todos">Todos</option>
-                            <option value="Veículos">Veículos</option>
-                            <option value="Imóveis">Imóveis</option>
-                        </select>
-                        <button class="selecionarTipo" onclick="selecionarTipo()">Selecionar</button>
+                        <h3 class="tipeOfProperty">Selecione o
+                            tipo:</h3>
+                        <div class="houseOrCar">
+                            <button class="imoveisFilterButton">
+                                <i
+                                    class="fa-solid fa-house"></i>
+                            </button>
+                            <button class="autoFilterButton">
+                                <i class="fa-solid fa-car"></i>
+                            </button>
+                        </div>
                     </div>
 
                 </div>
-
             </div>
-        </div>
-        </div>
-
-    </section>
-
-    <button id="deselectAll">Desmarcar Todos</button>
-
-
-
-
-    <!--Botão openModal-->
-    <section id="botoes_download">
-        <button class="action">Calcular Tabelas</button>
-        <!-- Botão de alternância -->
-        <button id="toggleExportButtons">Baixar tabela completa.</button>
-
-        <div id="exportButtonsFora">
-            <div id="exportButtons" style="transform: translateY(-150px);">
-                <button onclick="exportTableToPDF('tabela_contemplabens.pdf')">Baixar PDF</button>
-                <button id="exportButton">Baixar Excel</button>
-                <button id="download-csv">Baixar CSV</button>
+            <div class="isLoading">
+                <p>Aplicando filtros</p>
+                <i class="fa-solid fa-spinner"></i>
             </div>
-        </div>
 
+            <header>
+                <section class="head">
+                    <div class="container">
+                        <img
+                            src="http://designerluiscoms.com/wp-content/uploads/2024/07/logo-contemplabens.webp"
+                            alt>
 
-    </section>
+                    </section>
+                </header>
 
+                <section class="controles">
+                    <div class="cont">
+                        <div class="container apresent">
+                            <p>ESTOQUE CONSÓRCIOS CONTEMPLADOS CONTEMPLABENS</p>
 
-    <script>
+                            <div class="caixa-toggle" id="filter-credit">
+                                <div>
+                                    <label for="minValue-credit">Valor
+                                        Mínimo:</label>
+                                    <input type="number" id="minValue-credit"
+                                        min="0" max="10000000" step="100" />
+                                    <div id="minValueDisplay-credit"
+                                        class="value-display">0,00</div>
+                                </div>
 
-        //botão cascata.
+                                <div>
+                                    <label for="maxValue-credit">Valor
+                                        Máximo:</label>
+                                    <input type="number" id="maxValue-credit"
+                                        min="0" max="10000000" step="100" />
+                                    <div id="maxValueDisplay-credit"
+                                        class="value-display">10.000.000,00</div>
+                                </div>
+
+                                <button id="filterBtn-credit" disabled>Filtrar
+                                    Credito</button>
+                            </div>
+
+                            <div class="caixa-toggle" id="filter-entry">
+
+                                <div>
+                                    <label for="minValue-entry">Valor
+                                        Mínimo:</label>
+                                    <input type="number" id="minValue-entry"
+                                        min="0" max="5000000" step="100" />
+                                    <div id="minValueDisplay-entry"
+                                        class="value-display">0,00</div>
+                                </div>
+
+                                <div>
+                                    <label for="maxValue-entry">Valor
+                                        Máximo:</label>
+                                    <input type="number" id="maxValue-entry"
+                                        min="0" max="5000000" step="100" />
+                                    <div id="maxValueDisplay-entry"
+                                        class="value-display">5.000.000,00</div>
+                                </div>
+
+                                <button id="filterBtn-entry" disabled>Filtrar
+                                    Entrada</button>
+                            </div>
+
+                            <div class="caixa-toggle" id="filter-parts">
+
+                                <div>
+                                    <label for="minValue-parts">Valor
+                                        Mínimo:</label>
+                                    <input type="number" id="minValue-parts"
+                                        min="0" max="300000" step="10" />
+                                    <div id="minValueDisplay-parts"
+                                        class="value-display">0,00</div>
+                                </div>
+
+                                <div>
+                                    <label for="maxValue">Valor Máximo:</label>
+                                    <input type="number" id="maxValue-parts"
+                                        min="0" max="300000" step="10" />
+                                    <div id="maxValueDisplay-parts"
+                                        class="value-display">300.000,00</div>
+                                </div>
+
+                                <button id="filterBtn-parts" disabled>Filtrar
+                                    Parcelas</button>
+                            </div>
+                            </div class="container">
+
+                            <div class="container valorEntrada">
+                                <div class="pesquisa">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input id="searchInput" type="text"
+                                        placeholder="Pesquisar Administradora...">
+                                </div>
+
+                                <br>
+
+                                
+
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <div class="displayFilters">
+                    <button id="eraseAllFilters">Limpar Filtros</button>
+                </div>
+
+                <div class="action-special-buttons">
+                    <button id="deselectAll">Desmarcar Todos</button>
+                    <button class="action" id="acrion">Calcular Tabelas</button>
+                </div>
+
+                <section id="botoes_download">
+
+                    <button id="toggleExportButtons">Baixar tabela
+                        completa.</button>
+
+                    <div id="exportButtonsFora">
+                        <div id="exportButtons"
+                            style="transform: translateY(-150px);">
+                            <button
+                                onclick="exportTableToPDF('tabela_contemplabens.pdf')">Baixar
+                                PDF</button>
+                            <button id="exportButton">Baixar Excel</button>
+                            <button id="download-csv">Baixar CSV</button>
+                        </div>
+                    </div>
+
+                </section>
+
+                <script>
         document.getElementById('toggleExportButtons').addEventListener('click', function () {
             var exportButtons = document.getElementById('exportButtons');
             var buttonMostrar = document.getElementById('toggleExportButtons');
@@ -140,7 +230,21 @@
 
                 // Remove a primeira e segunda célula da linha na tabela clonada
                 $(this).find('th:eq(0), td:eq(0)').remove(); // Remove a primeira célula
-                //$(this).find('th:eq(0), td:eq(0)').remove(); // Remove a segunda célula 
+
+                const classList = $(this).attr('class') || '';
+                let rowClass = '';
+
+                if (classList.includes('imovel')) {
+                    rowClass = 'imovel';
+                } else if (classList.includes('auto')) {
+                    rowClass = 'auto';
+                } else if (classList.includes('seguimento')) {
+                    rowClass = 'seguimento';
+                }
+
+                if (rowClass) {
+                    $(this).find('th:eq(0), td:eq(0)').text(rowClass);
+                }
 
                 $(this).find('th, td').each(function () {
                     // Verifica se a célula tem o atributo 'realValue'
@@ -163,33 +267,6 @@
         }
 
 
-        //exclusivo para o csv
-        function copiarETrocarValoresNaTabela() {
-            // Clona a tabela original
-            const tabelaOriginal = document.querySelector('.waffle');
-            const tabelaClone = tabelaOriginal.cloneNode(true);
-
-            // Substitui o innerHTML nas células clonadas
-            const rows = tabelaClone.querySelectorAll('tr');
-            rows.forEach(row => {
-                const cells = row.querySelectorAll('td[realValue]');
-                cells.forEach(cell => {
-                    cell.innerHTML = cell.getAttribute('realValue');
-                });
-
-                // Remove a primeira e segunda célula de cada linha
-                if (row.children.length > 1) {
-                    row.removeChild(row.children[0]); // Remove a primeira célula
-                }
-                if (row.children.length > 1) {
-                    row.removeChild(row.children[0]); // Remove a segunda célula (agora que a primeira já foi removida)
-                }
-            });
-
-            return tabelaClone;
-        }
-
-
         // Exportar para PDF
         function exportTableToPDF(filename) {
             const rows = fetchHTMLTableData();
@@ -205,13 +282,64 @@
             doc.save(filename);
         }
 
+
+        //exclusivo para o csv
+        function copiarETrocarValoresNaTabela() {
+            // Clona a tabela original
+            const tabelaOriginal = document.querySelector('.waffle');
+            const tabelaClone = tabelaOriginal.cloneNode(true);
+
+            // Substitui o innerHTML nas células clonadas
+            const rows = tabelaClone.querySelectorAll('tr');
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td[realValue]');
+
+                cells.forEach(cell => {
+                    cell.innerHTML = cell.getAttribute('realValue');
+                });
+
+                // Aqui verificamos as classes da ROW
+                const classList = row.className || '';
+                let rowClass = '';
+
+                if (classList.includes('imovel')) {
+                    rowClass = 'imovel';
+                } else if (classList.includes('auto')) {
+                    rowClass = 'auto';
+                } else if (classList.includes('seguimento')) {
+                    rowClass = 'seguimento';
+                }
+
+                if (rowClass) {
+                    // Adiciona rowClass como texto na terceira célula (índice 2) se existir
+                    if (row.cells.length >= 3) {
+                        row.cells[2].innerText = rowClass;
+                    }
+                }
+
+                // Remove a primeira e segunda célula de cada linha
+                if (row.children.length > 1) {
+                    row.removeChild(row.children[0]); // Remove a primeira célula
+                }
+                if (row.children.length > 1) {
+                    row.removeChild(row.children[0]); // Remove a segunda célula (agora a nova primeira)
+                }
+            });
+
+            return tabelaClone;
+        }
+
+
+
+
         //Exportar para EXCELL
         document.getElementById('exportButton').addEventListener('click', function () {
             // Função que carrega os dados da tabela
             const rows = fetchHTMLTableData().map(row => {
                 return row.map(cell => {
                     // Adiciona uma quebra de linha e um espaço antes do '+' e um espaço após
-                    return cell.replace(/\+/g, '\n +'); 
+                    return cell.replace(/\+/g, '\n +');
                 });
             });
 
@@ -281,91 +409,78 @@
 
         document.getElementById('download-csv').addEventListener('click', downloadCSV);
 
-
-
-
     </script>
 
+                <dialog>
+                    <div id="valorCotas">
+                        <h1>Junção de cotas</h1>
+                        <div id="res">
+                            Aqui vão ficar suas informações de cotas
+                        </div>
 
+                    </div>
 
+                    <button class="btn-close">X</button>
+                    <div class="commission-box">
+                        <p>valor da comissão:<br><span
+                                id="result">0</span></p><br>
+                        <div class="botoesComissao">
+                            <button class="percentInput" value="0">0%</button>
+                            <button class="percentInput" value="1">1%</button>
+                            <button class="percentInput" value="2">2%</button>
+                            <button class="percentInput" value="3">3%</button>
+                            <button class="percentInput" value="4">4%</button>
+                            <button class="percentInput" value="5">5%</button>
+                            <button class="percentInput" value="6">6%</button>
+                            <button class="percentInput" value="7">7%</button>
+                            <button class="percentInput" value="8">8%</button>
+                            <button class="percentInput" value="9">9%</button>
+                            <button class="percentInput" value="10">10%</button>
+                        </div>
+                    </div>
 
+                    <button type="button" class="btn btn-primary"
+                        id="copyAndShare">Compartilhar no WhatsApp</button>
+                    <div id="botoes_copia">
+                        <button id="create_pdf">Gerar PDF</button>
+                        <button id="handleCopyResClick">Copiar Texto</button>
+                    </div>
+                </dialog>
 
-    <dialog>
-        <div id="valorCotas">
-            <h1>Junção de cotas</h1>
-            <div id="res">Aqui vão ficar suas informações de cotas</div>
-            <div class="comissoes">
-            </div>
-        </div>
+                <div class="tabela"></div>
 
-        <button class="btn-close">X</button>
-        <p>valor da comissão:<br><span id="result">0</span></p><br>
-        <div class="botoesComissao">
-            <button class="percentInput" value="0">0%</button>
-            <button class="percentInput" value="1">1%</button>
-            <button class="percentInput" value="2">2%</button>
-            <button class="percentInput" value="3">3%</button>
-            <button class="percentInput" value="4">4%</button>
-            <button class="percentInput" value="5">5%</button>
-            <button class="percentInput" value="6">6%</button>
-            <button class="percentInput" value="7">7%</button>
-            <button class="percentInput" value="8">8%</button>
-            <button class="percentInput" value="9">9%</button>
-            <button class="percentInput" value="10">10%</button>
-        </div>
+                <footer><br><br>
+                    <center>
+                        <p>
+                            <font color="#fff">CONTEMPLABENS 2024® | TODOS OS
+                                DIREITOS RESERVADOS. <br></br>
+                            CNPJ 26.756.365/0001-34<br><br>
 
+                            Rua Nuno Álvares Pereira número 600
+                            São José do Rio preto
+                            Estado São Paulo<br><br>
+                            desenvolvido por <a
+                                style="color: rgb(109, 109, 255);"
+                                href="https://designerluiscoms.com/"
+                                target="_blank">Adobra design ®</a></font><br>
 
+                    </p>
+                </center><br><br>
+            </footer>
 
+            <script>
 
-        <button type="button" class="btn btn-primary" id="copyAndShare">Compartilhar no WhatsApp</button>
-        <button id="create_pdf">Gerar PDF</button>
-    </dialog>
-
-
-    <div class="tabela"></div>
-
-
-
-
-    <footer><br><br>
-        <center>
-            <p>
-                <font color="#fff">CONTEMPLABENS 2024® | TODOS OS DIREITOS RESERVADOS. <BR></BR>
-                    CNPJ 26.756.365/0001-34<br><br>
-
-                    Rua Nuno Álvares Pereira número 600
-                    São José do Rio preto
-                    Estado São Paulo<br><br>
-                    desenvolvido por <a style="color: rgb(109, 109, 255);" href="https://designerluiscoms.com/"
-                        target="_blank">Adobra design ®</a></font><br>
-
-            </p>
-        </center><br><br>
-    </footer>
-
-    <!--script openModal-->
-    <script>
-
-
-
-
-        //variaveis globais
 
         const button = document.querySelector(".action")
         const buttonClose = document.querySelector(".btn-close")
         const table = document.querySelector(".waffle")
         const res = document.querySelector('#res')
         const modal = document.querySelector("dialog")
-        var select = document.querySelector("#select");
-        var selecionarTipo = document.querySelector(".selecionarTipo")
-        var veiculos = document.querySelectorAll(".veiculos")
-        var imoveis = document.querySelectorAll(".imoveis")
         var checks = document.querySelectorAll(".checkbox")
         var checksMark = $("input[type=checkbox]:checked")
         const secondCells = document.querySelectorAll("td:nth-child(2)")
         const secondCell = secondCells.innerHTML;
 
-        //Valor que guarda os dados do select adcionado.
 
         var adminNew = [];
         var checksGuard = [];
@@ -375,29 +490,9 @@
         var parcelasEnd;
         var valorDevedorEnd;
 
-
-
-
-        //Valores de JQuery dentro do Javascript
-        /*Aqui estão todas as informações importantes de somas
-        e variáveis guardadas.*/
-
-
-
-
-
-        //quando o documento for aberto.
-
         $(document).ready(function () {
-
-
-
-
             var currentRow = $(this);
             var ADM = currentRow.find("td:eq(2)").html();
-
-
-
 
             $('input[type=checkbox]').on('change', function () {
                 var checks = $("input[type=checkbox]:checked");
@@ -409,8 +504,6 @@
 
                     desSelecionarTodos.style.display = 'block'
 
-
-
                 }
 
                 // Adicionar classe "disableClick" às linhas que não têm a mesma classe da linha pai
@@ -421,14 +514,10 @@
                     }
                 });
 
-                // Remover classe "disableClick" de todas as linhas quando nenhum checkbox estiver marcado, exceto "toggleFilter"
                 if ($("input[type=checkbox]:checked").length === 0) {
                     $("tr").removeClass("disableClick");
                     desSelecionarTodos.style.display = 'none'
                 }
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
             });
 
 
@@ -464,55 +553,16 @@
         });
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-            selecionarTipo.onclick = function () {
-                const rows = $(".waffle tr");
-
-                if (select.value === "Veículos") {
-                    rows.each(function (index) {
-                        if (index === 1) return; // Ignora a primeira linha
-                        if (!$(this).hasClass('veículos')) {
-                            $(this).addClass('disabled');
-                        } else {
-                            $(this).removeClass('disabled');
-                        }
-                    });
-                } else if (select.value === "Imóveis") {
-                    rows.each(function (index) {
-                        if (index === 1) return; // Ignora a primeira linha
-                        if (!$(this).hasClass('imóveis')) {
-                            $(this).addClass('disabled');
-                        } else {
-                            $(this).removeClass('disabled');
-                        }
-                    });
-                } else if (select.value === "Todos") {
-                    rows.removeClass('disabled');
-                }
-            };
-
-
-
-
-        });
-
-
         //botão para desmarcar os checks
-
         document.getElementById('deselectAll').onclick = function () {
+            const actionSpecialButtons = document.querySelector(".action-special-buttons");
             var checkboxes = document.querySelectorAll("input[type=checkbox]");
             checkboxes.forEach(function (checkbox) {
                 checkbox.checked = false;
                 $("tr").removeClass("disableClick");
+                actionSpecialButtons.style.display = "none";
             });
-
-
         };
-
-
-
-
-
 
         function parseCurrency(value) {
             if (typeof value === 'string' && value.trim() !== '') {
@@ -533,7 +583,6 @@
         }
 
         button.onclick = function () {
-            console.clear();
 
             var aData = [];
             var checks = $("input[type=checkbox]:checked");
@@ -544,7 +593,7 @@
             $("tr").each(function () {
                 var obj = {};
                 var currentRow = $(this);
-                var Tipo = currentRow.find("td:eq(1)").html();
+                var Tipo = currentRow[0].classList[1];
                 var ADM = currentRow.find("td:eq(2)").html();
                 var Credito = currentRow.find("td:eq(3)").html();
                 var Entrada = currentRow.find("td:eq(4)").html();
@@ -715,7 +764,7 @@
 
                 return `<p><strong>Crédito: </strong> ${credito}</p>`;
                 //return `<p><strong>Crédito</strong> ${credito}: <strong>Entrada:</strong> ${entrada} + ${prazo}x de ${outrasParcelas}</p>`; // formatação antiga
-            }).join('<br>');
+            }).join('');
 
 
 
@@ -772,29 +821,32 @@
 
             if (aData.length == 1) {
                 res.innerHTML = `
-<p><strong>Administradora</strong> ${aData[0].ADM}<br>
-<strong>Categoria: </strong>${aData[0].Tipo}<br>
-<strong><p>Crédito: </strong>${creditoEnd}<br>
-<strong>Entrada:</strong> <span class="entrada">${entradaEnd}</span>
+<p><strong>Administradora: </strong> ${aData[0].ADM}<p/>
+<p><strong>Categoria: </strong> ${aData[0].Tipo}</p>
+<p><strong><p>Crédito: </strong> ${creditoEnd}<br></p>
+<p><strong>Entrada:</strong> <span class="entrada"> ${entradaEnd}</span></p>
 
-<strong>Parcelas: </strong>${resultadoFormatado}</p><br> 
+<p><strong>Parcelas:</p>
+    <p> </strong>${resultadoFormatado}</p><br> 
 
-<strong>Saldo Devedor:</strong> ${valorDevedorEnd}<br><br>
-<strong>Você selecionou</strong> ${checkedRows.length} carta(s).
+<p><strong>Saldo Devedor:</strong> ${valorDevedorEnd} </p><br><br>
+<p><strong>Você selecionou: </strong> ${checkedRows.length} carta(s).</p>
 ${formattedContent}`;
             } else if (aData.length > 1) {
                 var parcelaMenor = parseCurrency(objMenorPrazo.Parcelas) || 0;
                 var parcelaSubtraida = (somaParcelas - parcelaMenor);
 
-                res.innerHTML = `<p><strong>Administradora</strong> ${aData[0].ADM}<br>
-<strong>Categoria: </strong>${aData[0].Tipo}<br>
-<strong><p>Crédito: </strong>${creditoEnd}<br>
-<strong>Entrada:</strong> <span class="entrada">${entradaEnd}</span>
+                res.innerHTML = `
+<p><strong>Administradora: </strong> ${aData[0].ADM}</p>
+<p><strong>Categoria: </strong> ${aData[0].Tipo}</p>
+<p><strong><p>Crédito: </strong> ${creditoEnd}</p>
+<p><strong>Entrada: </strong> <span class="entrada"> ${entradaEnd}</p></span>
 
-<strong>Parcelas: </strong>${resultadoFormatado}</p><br>
+<p><strong>Parcelas:</p>
+    <p> </strong>${resultadoFormatado}</p><br> 
 
-<strong>Saldo Devedor:</strong> ${valorDevedorEnd}<br><br>
-<strong>Você selecionou</strong> ${checkedRows.length} carta(s)
+<p><strong>Saldo Devedor: </strong> ${valorDevedorEnd}</p><br><br>
+<p><strong>Você selecionou: </strong> ${checkedRows.length} carta(s)</p>
 ${formattedContent}`;
             }
 
@@ -814,13 +866,6 @@ ${formattedContent}`;
             });
         };
 
-
-
-
-
-
-
-
         //botão para fechar a janela de soma
         buttonClose.onclick = function () {
             res.innerHTML = ''
@@ -828,69 +873,63 @@ ${formattedContent}`;
             var aData = '';
         }
 
-
-
         $("#create_pdf").click(function () {
 
             var pdf = new jsPDF();
             var minhaData = new Date()
 
             pdf.fromHTML($('dialog').get(0), 20, 20, {
-
                 'width': 500
-
             });
-
             pdf.save(`cotas_somadas_${minhaData}.pdf`);
-
-
-
-
         });
 
+
+        $("#handleCopyResClick").click(function () {
+            iziToast.show({
+                title: 'Copiado',
+                message: 'para a área de transferencia!'
+            });
+            var copiedText = res.innerText.replace(/:\n/g, ': ').replace(/\n\n/g, "\n")
+            navigator.clipboard.writeText(copiedText)
+            alert("Copiado para área de transferencia!")
+        })
+
         $('#copyAndShare').click(function () {
-            // Seleciona o HTML do elemento
             var htmlContent = $('#valorCotas').html();
 
-            // Remove todas as tags HTML e preserva as quebras de linha
             var text = htmlContent
-                .replace(/<br\s*\/?>/gi, "\n")  // Substitui <br> por quebras de linha
-                .replace(/<\/p>/gi, "\n\n")  // Adiciona duas quebras de linha no final de cada parágrafo
-                .replace(/<\/div>/gi, "\n\n")  // Adiciona duas quebras de linha no final de cada div
-                .replace(/<[^>]+>/g, "")  // Remove todas as outras tags HTML
-                .replace(/^\s+/gm, "")  // Remove espaços em branco no início de cada linha
-                .replace(/(\n\s+)/g, "\n")  // Remove espaços em branco após quebras de linha
-                .trim();  // Remove espaços em branco desnecessários no início e no fim do texto
+                .replace(/<br\s*\/?>/gi, "\n")
+                .replace(/<\/p>/gi, "\n\n")
+                .replace(/<\/div>/gi, "\n\n")
+                .replace(/<[^>]+>/g, "")
+                .replace(/^\s+/gm, "")
+                .replace(/(\n\s+)/g, "\n")
+                .trim();
 
-            // Adiciona uma linha em branco após a primeira linha
             var lines = text.split("\n");
             if (lines.length > 1) {
-                lines.splice(1, 0, ""); // Adiciona uma linha em branco após a primeira linha
+                lines.splice(1, 0, "");
             }
 
-            // Adiciona uma linha em branco após a quinta linha
             if (lines.length > 5) {
-                lines.splice(6, 0, ""); // Adiciona uma linha em branco após a quinta linha
+                lines.splice(6, 0, "");
             }
-
-            // Adiciona uma linha em branco antes da palavra "Saldo"
             text = lines.join("\n");
             text = text.replace(/\nSaldo/, "\n\nSaldo").replace(/\nVocê/, "\n\nVocê").replace(/Junção de cotas/, "*Junção de cotas*");
 
-            // Criar uma textarea temporária para copiar o texto
             var tempTextarea = document.createElement('textarea');
             tempTextarea.style.position = 'absolute';
             tempTextarea.style.left = '-9999px';
-            tempTextarea.style.whiteSpace = 'pre-wrap'; // Garante a preservação dos espaços em branco e quebras de linha
+            tempTextarea.style.whiteSpace = 'pre-wrap';
             tempTextarea.value = text;
             document.body.appendChild(tempTextarea);
             tempTextarea.select();
             document.execCommand('copy');
             document.body.removeChild(tempTextarea);
 
-            // Abrir WhatsApp com o texto copiado
             var whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(text);
-            window.open(whatsappUrl, '_blank');
+            window.open((whatsappUrl), '_blank');
         });
 
 
@@ -922,16 +961,12 @@ ${formattedContent}`;
 
                 if ($(this).attr("data-value") === "11") {
 
-
-                    ///////////////////////////////////////////////////////////////////////////////////////
-                    // Itera sobre a linha e verifica se tem data value 11
-                    // separa todos os valores de forma organizada para serem calculados.
                     var multiplicadores = [];
                     var valoresMultiplicados = [];
                     var valorTotalMultiplicadores = {};
                     var valorTotalParcelas = {};
 
-                    console.log(parcelasText); // Verifique se parcelasText está correto
+                    console.log(parcelasText);
 
                     newCount = parcelasText.split('+').join('>');
                     newCount2 = newCount.split('x').join('>');
@@ -956,16 +991,13 @@ ${formattedContent}`;
                     console.log("Array 1:", array1);
                     console.log("Array 2:", array2);
 
-                    // Função para converter formato "00.000,00" para número
                     function convertToNumber(str) {
                         return parseFloat(str.replace(/\./g, '').replace(',', '.'));
                     }
 
-                    // Converte os valores de array1
                     let convertedArray1 = array1.map(convertToNumber);
                     let convertedArray2 = array2.map(Number);
 
-                    // Formata os valores convertidos de array1 de volta ao formato "00.000,00"
                     let formattedArray1 = convertedArray1.map(formatNumber);
 
                     let resultArray = [];
@@ -978,11 +1010,9 @@ ${formattedContent}`;
 
                     console.log("Array de Resultados:", resultArray);
 
-                    // Somar todos os valores de resultArray
                     let total = resultArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
                     let PrazoTotal = convertedArray2.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
-                    // Função para formatar número no formato "00.000,00"
                     function formatNumber(value) {
                         return new Intl.NumberFormat('de-DE', {
                             minimumFractionDigits: 2,
@@ -1014,7 +1044,7 @@ ${formattedContent}`;
                         const modalContentHtml = $('.modal-content').html();
                         const encodedHtml = encodeURIComponent(modalContentHtml);
                         //const shareLink = `./share.html?content=${encodedHtml}`;
-                        const shareLink = `https://designerluiscoms.com/contemplabens_share?content=${encodedHtml}`;
+                        const shareLink = `./share/?content=${encodedHtml}`;
                         window.open(shareLink, '_blank');
                     });
                 } else {
@@ -1034,7 +1064,7 @@ ${formattedContent}`;
                         const modalContentHtml = $('.modal-content').html();
                         const encodedHtml = encodeURIComponent(modalContentHtml);
                         //const shareLink = `./share.html?content=${encodedHtml}`;
-                        const shareLink = `https://designerluiscoms.com/contemplabens_share?content=${encodedHtml}`;
+                        const shareLink = `./share?content=${encodedHtml}`;
                         window.open(shareLink, '_blank');
                     });
                 }
@@ -1052,108 +1082,26 @@ ${formattedContent}`;
             }
 
 
-
-
-
-
-
-
-            //filtrar valor mínimo de entrada.
             function formatCurrency(value) {
                 return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             }
 
-            function parseCurrency(value) {
-                return parseFloat(value.replace(/\./g, '').replace(',', '.'));
-            }
-
-            $(document).ready(function () {
-
-                $('#minValue, #maxValue').on('input', function () {
-                    var minValue = parseFloat($('#minValue').val());
-                    var maxValue = parseFloat($('#maxValue').val());
-
-                    if (minValue > maxValue) {
-                        if ($(this).attr('id') === 'minValue') {
-                            $('#maxValue').val(minValue);
-                            maxValue = minValue;
-                        } else {
-                            $('#minValue').val(maxValue);
-                            minValue = maxValue;
-                        }
-                    }
-
-                    $('#minValueDisplay').text(formatCurrency(minValue));
-                    $('#maxValueDisplay').text(formatCurrency(maxValue));
-                });
-
-                $('#filterBtn').click(function () {
-
-                    // Obter os valores mínimo e máximo
-                    var minValue = parseFloat($('#minValue').val());
-                    var maxValue = parseFloat($('#maxValue').val());
-
-                    // Iterar sobre as linhas da tabela e filtrar com base nos valores da quinta coluna
-                    $('tr').each(function () {
-                        function parseCurrency(value) {
-                            return parseFloat(value.replace(/\./g, '').replace(',', '.'));
-                        }
-                        var cellValue = parseCurrency($(this).find('td:eq(4)').text());
-
-                        if (!isNaN(minValue) && !isNaN(maxValue)) {
-                            if (cellValue < minValue || cellValue > maxValue) {
-                                $(this).hide();
-                            } else {
-                                $(this).show();
-                            }
-                        }
-                    });
-                });
-            });
-
-
-
-
-
 
         });
 
-
-
-
-
-
-
-
-
-
     </script>
-    </head>
+            <script src="filters.js"></script>
+        </head>
 
-    <body>
+        <body>
 
-        <!-- Modal -->
-        <div class="modal">
+            <!-- Modal -->
+            <div class="modal">
 
-            <div class="modal-content">
-                <button id="shareButton">Compartilhar</button>
-                <!-- Aqui você pode exibir os detalhes da linha selecionada -->
-                <!-- Use jQuery para preencher os valores dinamicamente -->
+                <div class="modal-content">
+                    <button id="shareButton">Compartilhar</button>
+                </div>
             </div>
-        </div>
+        </body>
 
-
-
-
-
-
-
-
-
-
-
-    </body>
-
-
-
-</html>
+    </html>

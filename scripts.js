@@ -1,22 +1,22 @@
 // Aguarda o carregamento completo do DOM
 document.addEventListener("DOMContentLoaded", async function () {
-  const introductionAnimation = document.querySelector(
-    ".introduction-animation"
-  );
+  // const introductionAnimation = document.querySelector(
+  //   ".introduction-animation"
+  // );
 
-  setTimeout(function () {
-    introductionAnimation.animate(
-      [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }],
-      {
-        duration: 1000,
-        fill: "forwards",
-      }
-    );
-  }, 2000);
+  // setTimeout(function () {
+  //   introductionAnimation.animate(
+  //     [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }],
+  //     {
+  //       duration: 1000,
+  //       fill: "forwards",
+  //     }
+  //   );
+  // }, 2000);
 
-  setTimeout(function () {
-    introductionAnimation.remove();
-  }, 3000);
+  // setTimeout(function () {
+  //   introductionAnimation.remove();
+  // }, 3000);
 
   // Função para recarregar o CSS com um parâmetro de "cache busting"
   function reloadCSS() {
@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   reloadCSS();
-  const urlCSV = "https://docs.google.com/spreadsheets/d/1bUFgA8qUTXSAC4gqhsUTU25_dMEaKbM3YgWp4yg8tcU/export?format=csv&gid=0#gid=0";
+  const urlCSV =
+    "https://docs.google.com/spreadsheets/d/1bUFgA8qUTXSAC4gqhsUTU25_dMEaKbM3YgWp4yg8tcU/export?format=csv&gid=0#gid=0";
 
   try {
     const response = await fetch(urlCSV);
@@ -37,10 +38,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log(response);
 
     const linhas = csvText.trim().split("\n");
-    const tabelaDados =
-      linhas.map(
-        line => line.split(",").map(
-          cell => cell.replace(/"/g, "")));
+    const tabelaDados = linhas.map((line) =>
+      line.split(",").map((cell) => cell.replace(/"/g, "")),
+    );
 
     // Criar a div .ritz e tabela .waffle
     const divRitz = document.createElement("div");
@@ -66,7 +66,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Montar tbody com todos os dados, inclusive a antiga "linha cabeçalho"
     const tbody = document.createElement("tbody");
-    for(let i=0; i < tabelaDados.length; i++) {  // começa do zero, pega todas as linhas
+    for (let i = 0; i < tabelaDados.length; i++) {
+      // começa do zero, pega todas as linhas
       const tr = document.createElement("tr");
 
       // Criar <th> vazio no início de cada linha do tbody
@@ -75,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       tr.appendChild(thLinhaVazio);
 
       // Criar as células td para essa linha
-      tabelaDados[i].slice(0, 10).forEach(celula => {
+      tabelaDados[i].slice(0, 10).forEach((celula) => {
         const td = document.createElement("td");
         td.textContent = celula;
         tr.appendChild(td);
@@ -167,7 +168,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 return match + "+";
               }
               return match;
-            }
+            },
           );
 
           // Atualize as células da coluna "Prazo" e "Parcelas" com os números extraídos
@@ -198,15 +199,14 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         // Remove espaços em branco, acentuação e converte para letras minúsculas
         var classeSegundaCelula = normalizeText(
-          textoInterno.replace(/\s+/g, "")
+          textoInterno.replace(/\s+/g, ""),
         );
         var classePrimeiraCelula = normalizeText(
-          textoInterno2.replace(/\s+/g, "")
+          textoInterno2.replace(/\s+/g, ""),
         );
 
         $(this).addClass(classeSegundaCelula);
         $(this).addClass(classePrimeiraCelula);
-
 
         if (primeiraCelula.text().replace(/\s+/g, "") == "Imovel") {
           primeiraCelula.html(`<i class="fa-solid fa-house"></i>`);
@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               return match + "+";
             }
             return match;
-          }
+          },
         );
 
         sextaCelula.text(textoSextaCelula); // Atualiza o texto da célula
@@ -314,7 +314,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // Filtra os elementos, excluindo o segundo filho
   const elementosFiltrados = Array.from(coluna3).filter(
-    (celula, index) => index !== 1
+    (celula, index) => index !== 1,
   );
 
   elementosFiltrados.forEach((celula) => {
@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var deselectAll = document;
 
     const specialActionButtons = document.querySelector(
-      ".action-special-buttons"
+      ".action-special-buttons",
     );
     if (this.checked >= 1) {
       specialActionButtons.style.display = "flex";
@@ -361,7 +361,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   const imoveisFilterButton = document.querySelector(".imoveisFilterButton");
   const autoFilterButton = document.querySelector(".autoFilterButton");
   const tipeOfProperty = document.querySelector(".tipeOfProperty");
-
+  
+  const introductionAnimation = document.querySelector(
+    ".introduction-animation",
+  );
   imoveisFilterButton.addEventListener("click", function () {
     const auto = document.querySelectorAll(".auto");
     const imoveis = document.querySelectorAll(".imovel");
@@ -378,6 +381,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         tipeOfProperty.innerHTML = "Somente imóveis:";
       }
     });
+    introductionAnimation.classList.add("inactive");
   });
 
   autoFilterButton.addEventListener("click", function () {
@@ -395,5 +399,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         tipeOfProperty.innerHTML = "Somente automóveis:";
       }
     });
+    introductionAnimation.classList.add("inactive");
   });
 });
