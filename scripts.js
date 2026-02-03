@@ -1,23 +1,5 @@
 // Aguarda o carregamento completo do DOM
 document.addEventListener("DOMContentLoaded", async function () {
-  // const introductionAnimation = document.querySelector(
-  //   ".introduction-animation"
-  // );
-
-  // setTimeout(function () {
-  //   introductionAnimation.animate(
-  //     [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }],
-  //     {
-  //       duration: 1000,
-  //       fill: "forwards",
-  //     }
-  //   );
-  // }, 2000);
-
-  // setTimeout(function () {
-  //   introductionAnimation.remove();
-  // }, 3000);
-
   // Função para recarregar o CSS com um parâmetro de "cache busting"
   function reloadCSS() {
     const link = document.getElementById("dynamic-css");
@@ -26,6 +8,21 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     link.href = `${baseHref}?v=${timestamp}`;
   }
+
+  
+
+  const menuBtn = document.querySelector("#hamburgerBtn");
+  const menuClose = document.querySelector("#closeMenu");
+  const menu = document.getElementById("menuNav");
+
+  menuBtn.addEventListener("click", () => {
+    menu.classList.toggle("active");
+  });
+
+  menuClose.addEventListener("click", () => {
+    menu.classList.remove("active");
+  });
+  
 
   reloadCSS();
   const urlCSV =
@@ -361,7 +358,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const imoveisFilterButton = document.querySelector(".imoveisFilterButton");
   const autoFilterButton = document.querySelector(".autoFilterButton");
   const tipeOfProperty = document.querySelector(".tipeOfProperty");
-  
+
   const introductionAnimation = document.querySelector(
     ".introduction-animation",
   );

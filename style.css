@@ -13,6 +13,58 @@
         background-color: #181818;
     }
 
+   .menu {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background: #333;
+  transition: 0.3s;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & .menu-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+  }
+
+  & .menu-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.menu.active {
+  right: 0;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  margin: 10px 0;
+}
+
+
+.hamburger {
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  right: 20px
+}
+
+
     .introduction-animation {
         width: 100vw;
         height: 100vh;
@@ -27,7 +79,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        transition: .8s;
+        transition: .8s ease-in-out;
         opacity: 1;
 
         & p, h3{
@@ -75,6 +127,23 @@
         box-shadow: 2px 2px 2px #00000030;
         color: #000;
         transition: 0.3s;
+    }
+
+    #showHeader {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 30px;
+        color: #fff;
+        box-shadow: none;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &.active {
+            transform: scale(0.9) rotate(180deg);
+        }
     }
 
     td[realValue] {
@@ -343,6 +412,14 @@
         display: flex;
         flex-direction: column;
         margin: auto;
+        height: 10px;
+        overflow: hidden;
+        transition: .5s;
+
+    }
+
+    .cont.active {
+        height: 500px;
     }
 
     .controles p {
@@ -449,27 +526,27 @@
 
     tr {
         &[disponibility="Reservada"] {
-            background-color: #e69292;
+            background-color: #e69292 !important;
 
             & td[realValue]::before {
-                background-color: #e69292;
+                background-color: #e69292 !important;
             }
         }
 
         &[disponibility="Vendida"] {
-            background-color: #b4808050;
+            background-color: #b4808050 !important;
             pointer-events: none;
 
             & td[realValue]::before {
-                background-color: #b4808050;
+                background-color: #b4808050 !important;
             }
         }
 
         &[disponibility="Destaque"] {
-            background-color: #fff27b;
+            background-color: #fff27b !important;
 
             & td[realValue]::before {
-                background-color: #fff27b;
+                background-color: #fff27b !important;
             }
         }
     }
