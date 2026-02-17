@@ -38,7 +38,7 @@
             integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>tabela online</title>
-        <link id="dynamic-css" rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="style.css?v=3">
 
         <script src="scripts.js"></script>
 
@@ -88,8 +88,8 @@
                                 class="fa-solid fa-chevron-left"></i></button>
                     </div>
                     <div class="menu-items">
-                        <a onclick="location.reload()">Mudar</a>
-                        <a href="#">Sobre</a>
+                        <a onclick="location.reload()"><i class="fa-solid fa-arrow-rotate-right"></i></a>
+                        <a href="#">últimas adicionadas</a>
                         <a href="#">Contato</a>
                     </div>
                 </nav>
@@ -207,13 +207,11 @@
                         completa.</button>
 
                     <div id="exportButtonsFora">
-                        <div id="exportButtons"
-                            style="transform: translateY(-150px);">
+                        <div id="exportButtons">
                             <button
-                                onclick="exportTableToPDF('tabela_contemplabens.pdf')">Baixar
-                                PDF</button>
-                            <button id="exportButton">Baixar Excel</button>
-                            <button id="download-csv">Baixar CSV</button>
+                                onclick="exportTableToPDF('tabela_contemplabens.pdf')"><i class="fa-solid fa-file-pdf"></i></button>
+                            <button id="exportButton"><i class="fa-solid fa-file-excel"></i></button>
+                            <button id="download-csv"><i class="fa-solid fa-file-csv"></i></button>
                         </div>
                     </div>
 
@@ -224,17 +222,26 @@
             var exportButtons = document.getElementById('exportButtons');
             var buttonMostrar = document.getElementById('toggleExportButtons');
 
-            if (exportButtons.style.transform === 'translateY(-150px)') {
-                exportButtons.style.transform = 'translateY(0)';
-                buttonMostrar.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> Ocultar Botões de download`;
-                buttonMostrar.style.backgroundColor = 'red';
+            exportButtons.classList.toggle('visibleButtons');
+
+            if (exportButtons.classList.contains('visibleButtons')) {
+                buttonMostrar.textContent = 'Ocultar Botoes';
+
+                Object.assign(buttonMostrar.style, {
+                    'background-color': 'red',
+                    'color': 'white',
+                    'top': '10px'
+                })
             } else {
-                exportButtons.style.transform = 'translateY(-150px)';
-                buttonMostrar.textContent = 'Baixar tabela completa.';
-                buttonMostrar.style.backgroundColor = '#ccc'
+                buttonMostrar.textContent = 'Baixar Tabela Completa';
+
+                Object.assign(buttonMostrar.style, {
+                    'background-color': '',
+                    'color': '',
+                    'top': ''
+                })
             }
         });
-
 
         // Função para buscar dados da tabela HTML com a classe .waffle
         function fetchHTMLTableData() {

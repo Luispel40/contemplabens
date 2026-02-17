@@ -1,13 +1,5 @@
 // Aguarda o carregamento completo do DOM
 document.addEventListener("DOMContentLoaded", async function () {
-  // Função para recarregar o CSS com um parâmetro de "cache busting"
-  function reloadCSS() {
-    const link = document.getElementById("dynamic-css");
-    const baseHref = "style.css";
-    const timestamp = new Date().getTime();
-
-    link.href = `${baseHref}?v=${timestamp}`;
-  }
 
   
 
@@ -23,21 +15,33 @@ document.addEventListener("DOMContentLoaded", async function () {
     menu.classList.remove("active");
   });
   
-
-  reloadCSS();
   const urlCSV =
     "https://docs.google.com/spreadsheets/d/1bUFgA8qUTXSAC4gqhsUTU25_dMEaKbM3YgWp4yg8tcU/export?format=csv&gid=0#gid=0";
 
-  try {
+ try {
+  let csvText = sessionStorage.getItem("csvText");
+
+  // Se não existir no cache → faz fetch
+  if (!csvText) {
+    console.log("Buscando CSV da internet...");
+
     const response = await fetch(urlCSV);
-    const csvText = await response.text();
+    csvText = await response.text();
 
-    console.log(response);
+    // salva no sessionStorage
+    sessionStorage.setItem("csvText", csvText);
+  } else {
+    console.log("CSV carregado do sessionStorage!");
+  }
 
-    const linhas = csvText.trim().split("\n");
-    const tabelaDados = linhas.map((line) =>
-      line.split(",").map((cell) => cell.replace(/"/g, "")),
-    );
+  console.log(csvText);
+
+  // processamento normal
+  const linhas = csvText.trim().split("\n");
+
+  const tabelaDados = linhas.map((line) =>
+    line.split(",").map((cell) => cell.replace(/"/g, "")),
+  );
 
     // Criar a div .ritz e tabela .waffle
     const divRitz = document.createElement("div");
