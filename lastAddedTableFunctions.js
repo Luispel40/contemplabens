@@ -25,7 +25,18 @@ function filtrarUltimos7Dias() {
     }
   });
 }
+const menu = document.getElementById("menuNav");
 
+function hideMenu() {
+  menu.classList.toggle("active");
+}
 
 const lastAddedButton = document.getElementById("lastAddedButton");
-lastAddedButton.addEventListener("click", filtrarUltimos7Dias);
+lastAddedButton.addEventListener("click", function () {
+  filtrarUltimos7Dias();
+  hideMenu();
+});
+
+const hideMenuButton = document.getElementById("hideMenuButton");
+hideMenuButton.addEventListener("click", hideMenu);
+
