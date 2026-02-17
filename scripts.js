@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       tr.appendChild(thLinhaVazio);
 
       // Criar as células td para essa linha
-      tabelaDados[i].slice(0, 10).forEach((celula) => {
+      tabelaDados[i].slice(0, 11).forEach((celula) => {
         const td = document.createElement("td");
         td.textContent = celula;
         tr.appendChild(td);

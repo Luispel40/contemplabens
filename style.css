@@ -48,6 +48,10 @@ body {
       margin: 10px 0;
       pointer-events: all;
       cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
@@ -145,7 +149,10 @@ button:not(.selects button) {
   padding: 10px;
   border-radius: 0 0 50% 50%;
   margin-top: -20px;
-  transition: background-color 0s, margin-top 0.3s, transform 0.3s;
+  transition:
+    background-color 0s,
+    margin-top 0.3s,
+    transform 0.3s;
 
   &:hover {
     transform: scale(1.1);
@@ -732,7 +739,6 @@ section {
   scale: 1.2 !important;
   filter: blur(0px);
   cursor: pointer;
-  
 }
 
 #exportButtonsFora .visibleButtons {

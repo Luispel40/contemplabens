@@ -38,7 +38,7 @@
             integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>tabela online</title>
-        <link id="dynamic-css" rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="style.css?v=3">
 
         <script src="scripts.js"></script>
 
@@ -46,6 +46,23 @@
 
             <div class="introduction-animation">
                 <img src="img/Logo-ContemplaBens.png" alt>
+                <div class="container">
+                    <p>O que você precisa?</p>
+                    <div class="selects">
+                        <h3 class="tipeOfProperty">Selecione o
+                            tipo:</h3>
+                        <div class="houseOrCar">
+                            <button class="imoveisFilterButton">
+                                <i
+                                    class="fa-solid fa-house"></i>
+                            </button>
+                            <button class="autoFilterButton">
+                                <i class="fa-solid fa-car"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
             <div class="isLoading">
                 <p>Aplicando filtros</p>
@@ -61,11 +78,33 @@
 
                     </section>
                 </header>
+                <button class="hamburger" id="hamburgerBtn">
+                    ☰
+                </button>
+
+                <nav class="menu" id="menuNav">
+                    <div class="menu-back">
+                        <button id="closeMenu"><i
+                                class="fa-solid fa-chevron-left"></i></button>
+                    </div>
+                    <div class="menu-items">
+                        <a onclick="location.reload()"><i class="fa-solid fa-arrow-rotate-right"></i></a>
+                        <a id="lastAddedButton">últimas adicionadas</a>
+                        <a href="#">Contato</a>
+                    </div>
+                </nav>
 
                 <section class="controles">
-                    <div class="cont">
-                        <div class="container apresent">
-                            <p>ESTOQUE CONSÓRCIOS CONTEMPLADOS CONTEMPLABENS</p>
+                    <div class="container apresent">
+                        <p>ESTOQUE CONSÓRCIOS CONTEMPLADOS CONTEMPLABENS</p>
+                        <button class="show-header"
+                            id="showHeader"
+                            onclick="
+                            document.querySelector('#controles').classList.toggle('active');
+                            document.querySelector('#showHeader').classList.toggle('active');
+                            "><i
+                                class="fa-solid fa-chevron-down"></i></button>
+                        <div class="cont" id="controles">
 
                             <div class="caixa-toggle" id="filter-credit">
                                 <div>
@@ -136,8 +175,6 @@
                                 <button id="filterBtn-parts" disabled>Filtrar
                                     Parcelas</button>
                             </div>
-                            </div class="container">
-
                             <div class="container valorEntrada">
                                 <div class="pesquisa">
                                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -147,25 +184,9 @@
 
                                 <br>
 
-                                <div class="container">
-                                    <p>O que você precisa?</p>
-                                    <div class="selects">
-                                        <h3 class="tipeOfProperty">Selecione o
-                                            tipo:</h3>
-                                        <div class="houseOrCar">
-                                            <button class="imoveisFilterButton">
-                                                <i
-                                                    class="fa-solid fa-house"></i>
-                                            </button>
-                                            <button class="autoFilterButton">
-                                                <i class="fa-solid fa-car"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
                             </div>
+                            </div class="container">
+
                         </div>
                     </div>
 
@@ -186,13 +207,11 @@
                         completa.</button>
 
                     <div id="exportButtonsFora">
-                        <div id="exportButtons"
-                            style="transform: translateY(-150px);">
+                        <div id="exportButtons">
                             <button
-                                onclick="exportTableToPDF('tabela_contemplabens.pdf')">Baixar
-                                PDF</button>
-                            <button id="exportButton">Baixar Excel</button>
-                            <button id="download-csv">Baixar CSV</button>
+                                onclick="exportTableToPDF('tabela_contemplabens.pdf')"><i class="fa-solid fa-file-pdf"></i></button>
+                            <button id="exportButton"><i class="fa-solid fa-file-excel"></i></button>
+                            <button id="download-csv"><i class="fa-solid fa-file-csv"></i></button>
                         </div>
                     </div>
 
@@ -203,17 +222,26 @@
             var exportButtons = document.getElementById('exportButtons');
             var buttonMostrar = document.getElementById('toggleExportButtons');
 
-            if (exportButtons.style.transform === 'translateY(-150px)') {
-                exportButtons.style.transform = 'translateY(0)';
-                buttonMostrar.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> Ocultar Botões de download`;
-                buttonMostrar.style.backgroundColor = 'red';
+            exportButtons.classList.toggle('visibleButtons');
+
+            if (exportButtons.classList.contains('visibleButtons')) {
+                buttonMostrar.textContent = 'Ocultar Botoes';
+
+                Object.assign(buttonMostrar.style, {
+                    'background-color': 'red',
+                    'color': 'white',
+                    'top': '10px'
+                })
             } else {
-                exportButtons.style.transform = 'translateY(-150px)';
-                buttonMostrar.textContent = 'Baixar tabela completa.';
-                buttonMostrar.style.backgroundColor = '#ccc'
+                buttonMostrar.textContent = 'Baixar Tabela Completa';
+
+                Object.assign(buttonMostrar.style, {
+                    'background-color': '',
+                    'color': '',
+                    'top': ''
+                })
             }
         });
-
 
         // Função para buscar dados da tabela HTML com a classe .waffle
         function fetchHTMLTableData() {
@@ -416,7 +444,7 @@
                         <div id="res">
                             Aqui vão ficar suas informações de cotas
                         </div>
-                        
+
                     </div>
 
                     <button class="btn-close">X</button>
@@ -1089,7 +1117,9 @@ ${formattedContent}`;
         });
 
     </script>
+    
             <script src="filters.js"></script>
+            <script src="lastAddedTableFunctions.js"></script>
         </head>
 
         <body>
