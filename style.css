@@ -147,7 +147,7 @@ button:not(.selects button) {
   box-shadow: none;
   background-color: goldenrod;
   padding: 10px;
-  border-radius: 0 0 50% 50%;
+  border-radius: 50%;
   margin-top: -20px;
   transition:
     background-color 0s,
@@ -406,7 +406,7 @@ select {
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  background-color: goldenrod;
+  background-color: #171717;
   overflow: visible;
 }
 
