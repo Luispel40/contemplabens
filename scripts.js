@@ -376,7 +376,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         autoFilterButton.style.pointerEvents = "all";
         tipeOfProperty.innerHTML = "Selecione o tipo:";
       } else {
-        auto.classList.add("disabled");
+        auto.remove();
         autoFilterButton.style.opacity = 0.5;
         autoFilterButton.style.pointerEvents = "none";
         tipeOfProperty.innerHTML = "Somente imóveis:";
@@ -394,7 +394,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         imoveisFilterButton.style.pointerEvents = "all";
         tipeOfProperty.innerHTML = "Selecione o tipo:";
       } else {
-        imovel.classList.add("disabled");
+        imovel.remove();
         imoveisFilterButton.style.opacity = 0.5;
         imoveisFilterButton.style.pointerEvents = "none";
         tipeOfProperty.innerHTML = "Somente automóveis:";
