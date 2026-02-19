@@ -28,14 +28,22 @@ function filtrarUltimos7Dias() {
 const menu = document.getElementById("menuNav");
 
 function hideMenu() {
-  menu.classList.toggle("active");
+  menu.classList.remove("active");
 }
 
-const lastAddedButton = document.getElementById("lastAddedButton");
-lastAddedButton.addEventListener("click", function () {
-  filtrarUltimos7Dias();
-  hideMenu();
-});
+const lastAddedButton = document.querySelectorAll(".last-added-button");
+lastAddedButton.forEach((button) => {
+  button.addEventListener("click", function () {
+    filtrarUltimos7Dias();
+    hideMenu();
+    button.innerText = "Últimos 7 dias";
+    Object.assign(button.style, {
+      "background-color": "#b83939",
+      "color": "#fff",
+      "pointer-events": "none",
+    })
+  });
+})
 
 const hideMenuButton = document.getElementById("hideMenuButton");
 hideMenuButton.addEventListener("click", hideMenu);

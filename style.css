@@ -671,6 +671,22 @@ section {
   margin: 0 auto;
 }
 
+.top-table-buttons {
+  display: flex !important;
+  max-width: 400px !important;
+  margin: auto !important;
+  gap: 10px !important;
+
+  & button {
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+  }
+}
+
 #botoes_download {
   flex-direction: column;
 }
@@ -680,8 +696,6 @@ section {
 }
 
 #toggleExportButtons {
-  position: relative;
-  top: 40px;
   transition: 0.3s;
 }
 
@@ -932,9 +946,7 @@ button[disabled] {
 }
 
 @media (max-width: 767px) {
-  .controles .cont {
-    flex-direction: column;
-  }
+ 
 
   .modal {
     width: 100%;

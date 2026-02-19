@@ -89,7 +89,7 @@
                     </div>
                     <div class="menu-items">
                         <a onclick="location.reload()"><i class="fa-solid fa-arrow-rotate-right"></i></a>
-                        <a id="lastAddedButton">últimas adicionadas</a>
+                        <a class="last-added-button" id="lastAddedButton" href="#">últimas adicionadas</a>
                         <a href="#" id="hideMenuButton">Ocultar <i class="fa-solid fa-chevron-right"></i></a>
                     </div>
                 </nav>
@@ -195,7 +195,9 @@
                     <button class="action" id="acrion">Calcular Tabelas</button>
                 </div>
 
-                <section id="botoes_download">
+                <div class="top-table-buttons">
+                    <button class="last-added-button">últimas adicionadas</button>
+                    <section id="botoes_download">
 
                     <button id="toggleExportButtons">Baixar tabela
                         completa.</button>
@@ -210,6 +212,7 @@
                     </div>
 
                 </section>
+                </div>
 
                 <script>
         document.getElementById('toggleExportButtons').addEventListener('click', function () {
