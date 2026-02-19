@@ -139,30 +139,7 @@ button:not(.selects button) {
   transition: 0.3s;
 }
 
-#showHeader {
-  border: none;
-  cursor: pointer;
-  font-size: 30px;
-  color: #fff;
-  box-shadow: none;
-  background-color: goldenrod;
-  padding: 10px;
-  border-radius: 50%;
-  margin-top: -20px;
-  transition:
-    background-color 0s,
-    margin-top 0.3s,
-    transform 0.3s;
 
-  &:hover {
-    transform: scale(1.1);
-  }
-
-  &.active {
-    transform: scale(0.9) rotate3d(1, 0, 0, -180deg);
-    margin-top: -100px;
-  }
-}
 
 td[realValue] {
   position: relative;
@@ -415,20 +392,13 @@ select {
   display: flex;
   flex-direction: column;
   margin: auto;
-  height: 0px;
   overflow: hidden;
-  padding-top: 100px;
-  margin-top: -180px;
-  pointer-events: none;
+  padding-top: 50px;
   transition: 0.5s;
+  border-bottom: goldenrod 1px solid;
+  padding-bottom: 50px;
 }
 
-.cont.active {
-  height: 500px;
-  padding-top: 0px;
-  margin-top: 0px;
-  pointer-events: all;
-}
 
 .controles p {
   color: #ffffff;
@@ -609,6 +579,9 @@ tr:nth-child(1) {
 td:nth-child(7) {
   text-align: center !important;
   max-width: 40px;
+}
+td:nth-child(13) {
+display: none;
 }
 
 section {
