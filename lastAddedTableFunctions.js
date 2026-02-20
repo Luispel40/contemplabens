@@ -36,7 +36,7 @@ lastAddedButton.forEach((button) => {
   button.addEventListener("click", function () {
     filtrarUltimos7Dias();
     hideMenu();
-    button.innerText = "Últimos 7 dias";
+    button.innerText = "Últimas";
     Object.assign(button.style, {
       "background-color": "#b83939",
       "color": "#fff",

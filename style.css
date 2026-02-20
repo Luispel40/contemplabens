@@ -670,6 +670,9 @@ section {
   justify-content: space-around;
   margin: 0 auto;
 }
+.last-added-button {
+  text-transform: uppercase;
+}
 
 .top-table-buttons {
   display: flex !important;
@@ -678,6 +681,7 @@ section {
   gap: 10px !important;
 
   & button {
+    text-transform: uppercase !important;
     width: 100%;
     height: 60px;
     border-radius: 10px;
