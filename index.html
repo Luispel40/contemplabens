@@ -38,9 +38,9 @@
             integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>tabela online</title>
-        <link rel="stylesheet" href="style.css?v=3.2">
+        <link rel="stylesheet" href="style.css?v=3.3">
 
-        <script src="scripts.js?v=3.2"></script>
+        <script src="scripts.js?v=3.3"></script>
 
         <body>
 
@@ -223,7 +223,15 @@
                         </div>
 
                     </section>
-                    <button id="dinamicButtonFilter"></button>
+                        <div class="houseOrCarTopButtons">
+                            <button class="only-houses">
+                                <i
+                                    class="fa-solid fa-house"></i>
+                            </button>
+                            <button class="only-cars">
+                                <i class="fa-solid fa-car"></i>
+                            </button>
+                        </div>
                 </div>
 
                 <script>
@@ -525,41 +533,6 @@
         var totalEnd;
         var parcelasEnd;
         var valorDevedorEnd;
-
-        $(document).ready(function () {
-            var currentRow = $(this);
-            var ADM = currentRow.find("td:eq(2)").html();
-
-            $('input[type=checkbox]').on('change', function () {
-                var checks = $("input[type=checkbox]:checked");
-                var estaLinha = $(this);
-
-                var desSelecionarTodos = document.getElementById("deselectAll")
-
-                if ($("input[type=checkbox]:checked").length >= 1) {
-
-                    desSelecionarTodos.style.display = 'block'
-
-                }
-
-                // Adicionar classe "disableClick" às linhas que não têm a mesma classe da linha pai
-                $("tr").each(function () {
-                    if ($(this).attr("class") !== estaLinha.closest("tr").attr("class")) {
-                        $(this).addClass("disableClick");
-
-                    }
-                });
-
-                if ($("input[type=checkbox]:checked").length === 0) {
-                    $("tr").removeClass("disableClick");
-                    desSelecionarTodos.style.display = 'none'
-                }
-            });
-
-
-
-        })
-
 
         $("#searchInput").on("keyup", function () {
             const searchTerm = $(this).val().toLowerCase().trim();

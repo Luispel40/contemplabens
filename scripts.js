@@ -1,8 +1,4 @@
-// Aguarda o carregamento completo do DOM
 document.addEventListener("DOMContentLoaded", async function () {
-
-  
-
   const menuBtn = document.querySelector("#hamburgerBtn");
   const menuClose = document.querySelector("#closeMenu");
   const menu = document.getElementById("menuNav");
@@ -14,34 +10,31 @@ document.addEventListener("DOMContentLoaded", async function () {
   menuClose.addEventListener("click", () => {
     menu.classList.remove("active");
   });
-  
+
   const urlCSV =
     "https://docs.google.com/spreadsheets/d/1bUFgA8qUTXSAC4gqhsUTU25_dMEaKbM3YgWp4yg8tcU/export?format=csv&gid=0#gid=0";
 
- try {
-  let csvText = sessionStorage.getItem("csvText");
+  try {
+    let csvText = sessionStorage.getItem("csvText");
 
-  // Se não existir no cache → faz fetch
-  if (!csvText) {
-    console.log("Buscando CSV da internet...");
+    // Se não existir no cache → faz fetch
+    if (!csvText) {
+      console.log("Buscando CSV da internet...");
 
-    const response = await fetch(urlCSV);
-    csvText = await response.text();
+      const response = await fetch(urlCSV);
+      csvText = await response.text();
 
-    // salva no sessionStorage
-    sessionStorage.setItem("csvText", csvText);
-  } else {
-    console.log("CSV carregado do sessionStorage!");
-  }
+      // salva no sessionStorage
+      sessionStorage.setItem("csvText", csvText);
+    } else {
+    }
 
-  console.log(csvText);
+    // processamento normal
+    const linhas = csvText.trim().split("\n");
 
-  // processamento normal
-  const linhas = csvText.trim().split("\n");
-
-  const tabelaDados = linhas.map((line) =>
-    line.split(",").map((cell) => cell.replace(/"/g, "")),
-  );
+    const tabelaDados = linhas.map((line) =>
+      line.split(",").map((cell) => cell.replace(/"/g, "")),
+    );
 
     // Criar a div .ritz e tabela .waffle
     const divRitz = document.createElement("div");
@@ -147,7 +140,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           }
 
           // Copia o valor antigo das células "Prazo" e "Parcelas"
-          var oldPrazo = $(this).closest("tr").find("td:eq(5)").text();
           var oldParcelas = $(this)
             .closest("tr")
             .find("td:eq(6)")
@@ -158,19 +150,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
           // Adiciona "+" depois dos dois números após uma vírgula, se necessário
           var decimalpadron = /(\d{1},\d{2})(?![\d,]*\+)/g;
-          oldParcelas = oldParcelas.replace(
-            decimalpadron,
-            function (match, p1) {
-              var index = oldParcelas.indexOf(match) + match.length;
-              if (
-                index < oldParcelas.length &&
-                !oldParcelas.includes("+", index)
-              ) {
-                return match + "+";
-              }
-              return match;
-            },
-          );
+          oldParcelas = oldParcelas.replace(decimalpadron, function (match) {
+            var index = oldParcelas.indexOf(match) + match.length;
+            if (
+              index < oldParcelas.length &&
+              !oldParcelas.includes("+", index)
+            ) {
+              return match + "+";
+            }
+            return match;
+          });
 
           // Atualize as células da coluna "Prazo" e "Parcelas" com os números extraídos
           $(this).closest("tr").find("td:eq(5)").text(numerosAntesDoX);
@@ -217,15 +206,13 @@ document.addEventListener("DOMContentLoaded", async function () {
           primeiraCelula.html(`<i class="fa-solid fa-gears"></i>`);
         }
 
-        // Verifica a célula na posição 6 para adicionar o atributo "data-value"
         var sextaCelula = $(this).find("td:eq(6)");
         var textoSextaCelula = sextaCelula.text().trim();
 
-        // Adiciona "+" depois dos dois números após uma vírgula, se necessário
-        var decimalPattern = /(\d{1},\d{2})(?![\d,]*\+)/g; // Padrão para encontrar dois números depois de uma vírgula
+        var decimalPattern = /(\d{1},\d{2})(?![\d,]*\+)/g;
         textoSextaCelula = textoSextaCelula.replace(
           decimalPattern,
-          function (match, p1) {
+          function (match) {
             // Verifica se há mais números após os dois números decimais e se não há um "+"
             var index = textoSextaCelula.indexOf(match) + match.length;
             if (
@@ -238,7 +225,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           },
         );
 
-        sextaCelula.text(textoSextaCelula); // Atualiza o texto da célula
+        sextaCelula.text(textoSextaCelula);
 
         // Verifica se o valor contém "+" ou "x"
         if (
@@ -293,7 +280,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     };
 
-    // Chama a função para adicionar classes e atributos quando o documento estiver pronto
     $(document).ready(function () {
       adicionarClassesTabela();
       isAvaliableYesOrNot();
@@ -305,11 +291,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const coluna3 = document.querySelectorAll("td:nth-child(2)");
   const coluna4 = document.querySelectorAll("td:nth-child(3)");
-  const coluna5 = document.querySelectorAll("td:nth-child(4)");
 
-  // Inserir o texto "Seguimento" na célula da coluna 3 da linha 1
   if (coluna4.length > 1) {
-    // Verificar se há pelo menos 2 elementos na coluna4
     coluna4[0].innerHTML = "Seguimento";
   }
 
@@ -327,81 +310,130 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  $("input[type=checkbox]").on("change", function () {
-    var checks = $("input[type=checkbox]:checked");
-    var estaLinha = $(this);
-    var deselectAll = document;
+  disableClick = () => {
+    $("input[type=checkbox]").on("change", function () {
+      var estaLinha = $(this);
 
-    const specialActionButtons = document.querySelector(
-      ".action-special-buttons",
-    );
-    if (this.checked >= 1) {
-      specialActionButtons.style.display = "flex";
-      setTimeout(function () {
-        specialActionButtons.style.bottom = "0px";
+      const specialActionButtons = document.querySelector(
+        ".action-special-buttons",
+      );
+      if (this.checked >= 1) {
+        specialActionButtons.style.display = "flex";
+        setTimeout(function () {
+          specialActionButtons.style.bottom = "0px";
+        });
+      }
+
+      $("tr").each(function () {
+        if ($(this).attr("class") !== estaLinha.closest("tr").attr("class")) {
+          $(this).addClass("disableClick");
+        }
       });
-    }
 
-    // Adicionar classe "disableClick" às linhas que não têm a mesma classe da linha pai
-    $("tr").each(function () {
-      if ($(this).attr("class") !== estaLinha.closest("tr").attr("class")) {
-        $(this).addClass("disableClick");
+      if ($("input[type=checkbox]:checked").length === 0) {
+        $("tr").removeClass("disableClick");
+        specialActionButtons.style.bottom = "-150px";
+        setTimeout(function () {
+          specialActionButtons.style.display = "none";
+        }, 1000);
       }
     });
+  };
 
-    // Remover classe "disableClick" de todas as linhas quando nenhum checkbox estiver marcado
-    if ($("input[type=checkbox]:checked").length === 0) {
-      $("tr").removeClass("disableClick");
-      specialActionButtons.style.bottom = "-150px";
-      setTimeout(function () {
-        specialActionButtons.style.display = "none";
-      }, 1000);
+  disableClick();
+  function saveLocalTable() {
+    const tabela = document.querySelector(".ritz table.waffle");
+    if (!tabela) {
+      console.warn("Tabela não encontrada.");
+      return;
     }
-  });
+
+    const tabelaHTML = tabela.outerHTML;
+
+    // Salva no sessionStorage
+    sessionStorage.setItem("localTableHTML", tabelaHTML);
+
+    console.log("Tabela salva no sessionStorage com sucesso.");
+  }
 
   const imoveisFilterButton = document.querySelector(".imoveisFilterButton");
   const autoFilterButton = document.querySelector(".autoFilterButton");
-  const tipeOfProperty = document.querySelector(".tipeOfProperty");
-  const dinamicButtonFilter = document.querySelector("#dinamicButtonFilter");
+  onlyHousesButton = document.querySelector(".only-houses");
+  onlyCarsButton = document.querySelector(".only-cars");
 
   const introductionAnimation = document.querySelector(
     ".introduction-animation",
   );
-  imoveisFilterButton.addEventListener("click", function () {
-    const auto = document.querySelectorAll(".auto");
-    const imoveis = document.querySelectorAll(".imovel");
-    auto.forEach((auto) => {
-      if (auto.classList.contains("disabled")) {
-        auto.classList.remove("disabled");
-        autoFilterButton.style.opacity = 1;
-        autoFilterButton.style.pointerEvents = "all";
-        tipeOfProperty.innerHTML = "Selecione o tipo:";
-        dinamicButtonFilter.innerHTML = `funcionou`;
-      } else {
-        auto.remove();
-        autoFilterButton.style.opacity = 0.5;
-        autoFilterButton.style.pointerEvents = "none";
-        tipeOfProperty.innerHTML = "Somente imóveis:";
-      }
-    });
-    introductionAnimation.classList.add("inactive");
-  });
 
-  autoFilterButton.addEventListener("click", function () {
+  filterOnlyHouses = () => {
     const imoveis = document.querySelectorAll(".imovel");
     imoveis.forEach((imovel) => {
       if (imovel.classList.contains("disabled")) {
         imovel.classList.remove("disabled");
         imoveisFilterButton.style.opacity = 1;
         imoveisFilterButton.style.pointerEvents = "all";
-        tipeOfProperty.innerHTML = "Selecione o tipo:";
       } else {
         imovel.remove();
         imoveisFilterButton.style.opacity = 0.5;
         imoveisFilterButton.style.pointerEvents = "none";
-        tipeOfProperty.innerHTML = "Somente automóveis:";
+        onlyCarsButton.style.display = "none";
       }
     });
+  };
+
+  filterOnlyCars = () => {
+    const auto = document.querySelectorAll(".auto");
+    auto.forEach((auto) => {
+      if (auto.classList.contains("disabled")) {
+        auto.classList.remove("disabled");
+        autoFilterButton.style.opacity = 1;
+        autoFilterButton.style.pointerEvents = "all";
+      } else {
+        auto.remove();
+        autoFilterButton.style.opacity = 0.5;
+        autoFilterButton.style.pointerEvents = "none";
+        onlyHousesButton.style.display = "none";
+      }
+    });
+  };
+
+  imoveisFilterButton.addEventListener("click", function () {
+    saveLocalTable();
+    filterOnlyCars();
+    introductionAnimation.classList.add("inactive");
+  });
+
+  autoFilterButton.addEventListener("click", function () {
+    saveLocalTable();
+    filterOnlyHouses();
+    introductionAnimation.classList.add("inactive");
+  });
+
+  function restoreLocalTable() {
+    const tabelaSalva = sessionStorage.getItem("localTableHTML");
+    if (!tabelaSalva) return;
+
+    const container = document.querySelector(".ritz");
+    if (container) {
+      container.innerHTML = tabelaSalva;
+    }
+  }
+
+  onlyCarsButton.addEventListener("click", function () {
+    onlyCarsButton.style.display = "none";
+    onlyHousesButton.style.display = "block";
+    restoreLocalTable();
+    disableClick();
+    filterOnlyHouses();
+    introductionAnimation.classList.add("inactive");
+  });
+
+  onlyHousesButton.addEventListener("click", function () {
+    onlyHousesButton.style.display = "none";
+    onlyCarsButton.style.display = "block";
+    restoreLocalTable();
+    disableClick();
+    filterOnlyCars();
     introductionAnimation.classList.add("inactive");
   });
 });
