@@ -92,16 +92,19 @@
                                 class="fa-solid fa-chevron-left"></i></button>
                     </div>
                     <div class="menu-items">
-                        <a onclick="location.reload()"><i class="fa-solid fa-arrow-rotate-right"></i></a>
-                        <a class="last-added-button" id="lastAddedButton" href="#">últimas adicionadas</a>
-                        <a href="#" id="hideMenuButton">Ocultar <i class="fa-solid fa-chevron-right"></i></a>
+                        <a onclick="location.reload()"><i
+                                class="fa-solid fa-arrow-rotate-right"></i></a>
+                        <a class="last-added-button" id="lastAddedButton"
+                            href="#">últimas adicionadas</a>
+                        <a href="#" id="hideMenuButton">Ocultar <i
+                                class="fa-solid fa-chevron-right"></i></a>
                     </div>
                 </nav>
 
                 <section class="controles">
                     <div class="container apresent">
                         <p>ESTOQUE CONSÓRCIOS CONTEMPLADOS CONTEMPLABENS</p>
-                       
+
                         <div class="cont" id="controles">
 
                             <div class="caixa-toggle" id="filter-credit">
@@ -200,22 +203,27 @@
                 </div>
 
                 <div class="top-table-buttons">
-                    <button class="last-added-button">últimas adicionadas</button>
+                    <button class="last-added-button">últimas
+                        adicionadas</button>
                     <section id="botoes_download">
 
-                    <button id="toggleExportButtons">Baixar tabela
-                        completa.</button>
+                        <button id="toggleExportButtons">Baixar tabela
+                            .</button>
 
-                    <div id="exportButtonsFora">
-                        <div id="exportButtons">
-                            <button
-                                onclick="exportTableToPDF('tabela_contemplabens.pdf')"><i class="fa-solid fa-file-pdf"></i></button>
-                            <button id="exportButton"><i class="fa-solid fa-file-excel"></i></button>
-                            <button id="download-csv"><i class="fa-solid fa-file-csv"></i></button>
+                        <div id="exportButtonsFora">
+                            <div id="exportButtons">
+                                <button
+                                    onclick="exportTableToPDF('tabela_contemplabens.pdf')"><i
+                                        class="fa-solid fa-file-pdf"></i></button>
+                                <button id="exportButton"><i
+                                        class="fa-solid fa-file-excel"></i></button>
+                                <button id="download-csv"><i
+                                        class="fa-solid fa-file-csv"></i></button>
+                            </div>
                         </div>
-                    </div>
 
-                </section>
+                    </section>
+                    <button id="dinamicButtonFilter"></button>
                 </div>
 
                 <script>
@@ -1118,7 +1126,7 @@ ${formattedContent}`;
         });
 
     </script>
-    
+
             <script src="filters.js"></script>
             <script src="lastAddedTableFunctions.js"></script>
         </head>

@@ -362,6 +362,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const imoveisFilterButton = document.querySelector(".imoveisFilterButton");
   const autoFilterButton = document.querySelector(".autoFilterButton");
   const tipeOfProperty = document.querySelector(".tipeOfProperty");
+  const dinamicButtonFilter = document.querySelector("#dinamicButtonFilter");
 
   const introductionAnimation = document.querySelector(
     ".introduction-animation",
@@ -375,6 +376,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         autoFilterButton.style.opacity = 1;
         autoFilterButton.style.pointerEvents = "all";
         tipeOfProperty.innerHTML = "Selecione o tipo:";
+        dinamicButtonFilter.innerHTML = `funcionou`;
       } else {
         auto.remove();
         autoFilterButton.style.opacity = 0.5;
