@@ -26,7 +26,6 @@ function reorganizarPorDataHora() {
       return;
     }
 
-    // Suporta formato: DD/MM/AAAA ou DD/MM/AAAA HH:MM
     const [dataParte, horaParte] = dataTexto.split(" ");
     const [dia, mes, ano] = dataParte.split("/");
 

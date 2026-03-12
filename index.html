@@ -320,7 +320,11 @@
             doc.autoTable({
                 head: [rows[0]],
                 body: rows.slice(1),
-                styles: { halign: 'center', valign: 'middle' }
+                styles: {
+        halign: 'center',
+        valign: 'middle',
+        fontSize: 6
+    }
             });
 
             doc.save(filename);
