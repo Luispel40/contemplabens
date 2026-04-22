@@ -5,8 +5,12 @@ function reorganizarPorDataHora() {
   const tbody = tabela.querySelector("tbody");
   const linhas = Array.from(tbody.querySelectorAll("tr"));
 
-  // 👉 preserva as duas primeiras linhas
-  const cabecalho = linhas.slice(0, 1);
+  // 1. Defina aqui qual coluna contém a data (0 é a primeira, 1 a segunda...)
+  // Se for sempre a última, mantenha o cálculo dinâmico dentro do loop.
+  const COLUNA_DATA_INDEX = -1; // -1 para usar a última coluna
+
+  // 2. Preserva o cabeçalho (Ajuste para 1 ou 2 conforme sua necessidade)
+  const cabecalho = linhas.slice(0, 1); 
   const dados = linhas.slice(1);
 
   const comData = [];
@@ -14,79 +18,90 @@ function reorganizarPorDataHora() {
 
   dados.forEach(row => {
     const celulas = row.querySelectorAll("td");
-    if (!celulas.length) {
-      semData.push(row);
-      return;
-    }
+    if (celulas.length === 0) return;
 
-    const dataTexto = celulas[celulas.length - 1].textContent.trim();
+    // Pega a célula da data (seja a última ou um índice fixo)
+    const index = COLUNA_DATA_INDEX === -1 ? celulas.length - 1 : COLUNA_DATA_INDEX;
+    const dataTexto = celulas[index]?.textContent.trim() || "";
 
     if (!dataTexto) {
       semData.push(row);
       return;
     }
 
-    const [dataParte, horaParte] = dataTexto.split(" ");
-    const [dia, mes, ano] = dataParte.split("/");
+    // Regex para extrair data e hora com mais segurança
+    // Formato esperado: "DD/MM/YYYY HH:MM" ou "DD/MM/YYYY"
+    const match = dataTexto.match(/(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2}))?/);
 
-    if (!dia || !mes || !ano) {
+    if (!match) {
       semData.push(row);
       return;
     }
 
-    let horas = 0;
-    let minutos = 0;
+    const [_, dia, mes, ano, horas, minutos] = match;
+    
+    // Mês no JS começa em 0 (Janeiro = 0)
+    const dataObj = new Date(
+      parseInt(ano), 
+      parseInt(mes) - 1, 
+      parseInt(dia), 
+      parseInt(horas) || 0, 
+      parseInt(minutos) || 0
+    );
 
-    if (horaParte) {
-      const partesHora = horaParte.split(":");
-      horas = parseInt(partesHora[0]) || 0;
-      minutos = parseInt(partesHora[1]) || 0;
-    }
-
-    const dataObj = new Date(ano, mes - 1, dia, horas, minutos);
-
-    if (isNaN(dataObj)) {
+    if (isNaN(dataObj.getTime())) {
       semData.push(row);
     } else {
       comData.push({ row, data: dataObj });
     }
   });
 
-  // 🔽 Ordena da mais nova para a mais antiga
-  comData.sort((a, b) => b.data - a.data);
+  // 3. Ordenação: Mais recente primeiro (Descendente)
+  comData.sort((a, b) => b.data.getTime() - a.data.getTime());
 
-  // 🔁 Limpa tbody
+  // 4. Reinserção eficiente usando DocumentFragment
+  const fragment = document.createDocumentFragment();
+  
+  // Adiciona cabeçalho
+  cabecalho.forEach(row => fragment.appendChild(row));
+  
+  // Adiciona ordenadas
+  comData.forEach(item => fragment.appendChild(item.row));
+  
+  // Adiciona sem data por último
+  semData.forEach(row => fragment.appendChild(row));
+
+  // Limpa e aplica tudo de uma vez para melhor performance
   tbody.innerHTML = "";
-
-  // 🔒 Reinsere cabeçalho
-  cabecalho.forEach(row => tbody.appendChild(row));
-
-  // 📅 Reinsere ordenadas
-  comData.forEach(item => tbody.appendChild(item.row));
-
-  // 📌 Linhas sem data ficam logo após
-  semData.forEach(row => tbody.appendChild(row));
+  tbody.appendChild(fragment);
 }
+
+// --- Restante do script (Lógica de UI) ---
+
 const menu = document.getElementById("menuNav");
 
 function hideMenu() {
-  menu.classList.remove("active");
+  if (menu) menu.classList.remove("active");
 }
 
-const lastAddedButton = document.querySelectorAll(".last-added-button");
-lastAddedButton.forEach((button) => {
+const lastAddedButtons = document.querySelectorAll(".last-added-button");
+lastAddedButtons.forEach((button) => {
   button.addEventListener("click", function () {
     reorganizarPorDataHora();
     hideMenu();
-    button.innerText = "Últimas";
+    
+    // Estilização de feedback
+    button.innerText = "Ordenado"; // Mudei para "Ordenado" para fazer mais sentido
     Object.assign(button.style, {
       "background-color": "#b83939",
       "color": "#fff",
       "pointer-events": "none",
-    })
+      "opacity": "0.8"
+    });
   });
-})
+});
 
 const hideMenuButton = document.getElementById("hideMenuButton");
-hideMenuButton.addEventListener("click", hideMenu);
-
+if (hideMenuButton) {
+  hideMenuButton.addEventListener("click", hideMenu);
+}
