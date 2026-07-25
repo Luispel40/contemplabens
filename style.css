@@ -649,6 +649,10 @@ section {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
+
+  & #shareButton {
+    display: none;
+  }
 }
 
 .modal-content td {
