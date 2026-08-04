@@ -902,7 +902,7 @@ ${formattedContent}`;
                 title: 'Copiado',
                 message: 'para a área de transferencia!'
             });
-            var copiedText = res.innerText.replace(/:\n/g, ': ').replace(/\n\n/g, "\n")
+            var copiedText = res.innerText.replace(/:\n/g, ': ').replace(/\n\n/g, "\n").replace(/\n\n/g, "\n");
             navigator.clipboard.writeText(copiedText)
             alert("Copiado para área de transferencia!")
         })
