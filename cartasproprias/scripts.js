@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   const urlCSV =
-    "https://docs.google.com/spreadsheets/d/1bUFgA8qUTXSAC4gqhsUTU25_dMEaKbM3YgWp4yg8tcU/export?format=csv&gid=0#gid=0";
+    "https://docs.google.com/spreadsheets/d/1sjOyj4O4bAvOUHK4O6QEddDbVewyu08CdKCsWZ1ahi8/export?format=csv&gid=0#gid=0";
 
   try {
     let csvText = sessionStorage.getItem("csvText");
